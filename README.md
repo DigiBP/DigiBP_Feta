@@ -105,3 +105,6 @@
 
 ## License
 - [Apache License, Version 2.0](https://github.com/DigiBP/digibp-archetype-camunda-boot/blob/master/LICENSE)
+
+## User
+- [Timothy Applewhite](https://github.com/timothyapplewhite)
