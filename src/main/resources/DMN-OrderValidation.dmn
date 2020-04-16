@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_1esz7o6" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
+  <decision id="Decision_orderValidation" name="Order Validation">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="InputClause_1aj2riu" label="Sandwich quantity" camunda:inputVariable="SandwichQuantity">
+        <inputExpression id="LiteralExpression_09j224e" typeRef="integer" expressionLanguage="JavaScript">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_06hkofe" label="Croissant quantity" camunda:inputVariable="CroissantQuantity">
+        <inputExpression id="LiteralExpression_0jwal3n" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1j64dhc" label="Pastery quantity" camunda:inputVariable="PasteryQuantity">
+        <inputExpression id="LiteralExpression_1yah6zo" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0uzu1po" label="Fullfillment_date" camunda:inputVariable="FulfilmentDate">
+        <inputExpression id="LiteralExpression_0qubpfu" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1x4tw9l" label="Total quantity" camunda:inputVariable="TotalQuantity">
+        <inputExpression id="LiteralExpression_0hnpcoa" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Valid" name="valid" typeRef="boolean" />
+      <output id="OutputClause_012cnej" label="Explanation" name="explanation" typeRef="string" />
+      <rule id="DecisionRule_0zoksln">
+        <description>"Quick delivery possible"</description>
+        <inputEntry id="UnaryTests_0j6jrqn">
+          <text>&lt;= 50</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0raayn1">
+          <text>&lt;= 150</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ozhmk7">
+          <text>&lt;=100</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1f2e53d">
+          <text>&lt; 7</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hs321z">
+          <text>&lt;= 150</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_028vnkr">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0xbd2fu">
+          <text>"Quick delivery possible"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0fd91j7">
+        <description>"Normal delivery possible"</description>
+        <inputEntry id="UnaryTests_0zss1dl">
+          <text>&lt;= 150</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03yi7uj">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1g58mos">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dpxcw2">
+          <text>&gt;= 7</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18llcny">
+          <text>&lt;= 200</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0h4a536">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0j31ibx">
+          <text>"Normal delivery possible"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1iso1w1">
+        <description>"More than 150 sandwiches"</description>
+        <inputEntry id="UnaryTests_0t2vkqo">
+          <text>&gt; 150</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0trofea">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kavy91">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nishkt">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w98zfw">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18svivr">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ajhsdk">
+          <text>"More than 150 sandwiches"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05ooca0">
+        <description>"Total amount exceeds quick delivery requirements"</description>
+        <inputEntry id="UnaryTests_06aqjlp">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tq6up4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e370lo">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02o9gwa">
+          <text>&lt;= 7</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0361ac1">
+          <text>&gt; 150</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h4n83l">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1opmsgz">
+          <text>"Total amount exceeds quick delivery requirements"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_04vo7kl">
+        <description>"Maximum amount exceeded"</description>
+        <inputEntry id="UnaryTests_1fziaul">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dln8rw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0b1s3t0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04pbvr2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01nh3xy">
+          <text>&gt; 200</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_030npft">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05x71kq">
+          <text>"Maximum amount exceeded"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ralgdz">
+        <description>"Too many pasteries for quick delivery"</description>
+        <inputEntry id="UnaryTests_0fulru7">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1q98bj8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05lx6mj">
+          <text>&gt; 100</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1j68olh">
+          <text>&lt; 7</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wadlvb">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1w9x7d4">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_06ryed0">
+          <text>"Too many pasteries for quick delivery"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0eulee3">
+        <description>"Too many sandwiches for quick delivery"</description>
+        <inputEntry id="UnaryTests_1fdo1e1">
+          <text>&gt; 50</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qrspqy">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1nrb7am">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06kxpqw">
+          <text>&lt; 7</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12euto1">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lbfn3g">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0at4zcg">
+          <text>"Too many sandwiches for quick delivery"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0sy7xhe">
+        <description>"Too many croissants for quick delivery"</description>
+        <inputEntry id="UnaryTests_1kzrsqq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01rat78">
+          <text>&gt; 150</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02etw93">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mddqjg">
+          <text>&lt; 7</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04yqltt">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08uy9tp">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rldkj4">
+          <text>"Too many croissants for quick delivery"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_16l5kwm">
+        <description>"At least 3 days delivery time is required"</description>
+        <inputEntry id="UnaryTests_0p11sqx">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_053yq1k">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1oxavgj">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_156iqei">
+          <text>&lt; 3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wf6pxn">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_133knfm">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_001ha0a">
+          <text>"At least 3 days delivery time is required"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
