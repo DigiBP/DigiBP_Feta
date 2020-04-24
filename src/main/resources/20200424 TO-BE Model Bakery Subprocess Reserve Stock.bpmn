@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0yyvm4d" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <bpmn:collaboration id="Collaboration_0mrvuty">
+    <bpmn:participant id="Participant_1r74pk4" name="Sub-Process Reserve Stock" processRef="Process_03w03b4" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_03w03b4" isExecutable="true">
+    <bpmn:startEvent id="Event_0aoh001">
+      <bpmn:outgoing>Flow_1nqzds2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:dataStoreReference id="Flow_1kr7cxg" name="Recipe DB" />
+    <bpmn:serviceTask id="Activity_1jzr0f8" name="Convert Shopping Basket to Ingredients List">
+      <bpmn:documentation />
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method" />
+            <camunda:inputParameter name="URL">https://hook.integromat.com/ilalq1l4zqxj1711my1mygn0pfc4ken3</camunda:inputParameter>
+            <camunda:outputParameter name="IngredientsList">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+IngredientsList=object.IngredientsList;</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1nqzds2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mowbgr</bpmn:outgoing>
+      <bpmn:property id="Property_0u874zl" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0wvmfp4">
+        <bpmn:sourceRef>Flow_1kr7cxg</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0u874zl</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_021k5zr">
+        <bpmn:targetRef>Flow_1kr7cxg</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1mowbgr" sourceRef="Activity_1jzr0f8" targetRef="Activity_1420gd0" />
+    <bpmn:sequenceFlow id="Flow_1nqzds2" sourceRef="Event_0aoh001" targetRef="Activity_1jzr0f8" />
+    <bpmn:dataStoreReference id="Flow_19yz5dm" name="Stock Mgmt System" />
+    <bpmn:serviceTask id="Activity_1420gd0" name="Reserve Ingredients in Stock">
+      <bpmn:incoming>Flow_1mowbgr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ojn8ns</bpmn:outgoing>
+      <bpmn:property id="Property_1vmyfzt" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1v056gs">
+        <bpmn:sourceRef>Flow_19yz5dm</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1vmyfzt</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1lbavql">
+        <bpmn:targetRef>Flow_19yz5dm</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_0wht1xx">
+      <bpmn:incoming>Flow_0ojn8ns</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ojn8ns" sourceRef="Activity_1420gd0" targetRef="Event_0wht1xx" />
+    <bpmn:textAnnotation id="TextAnnotation_0md6tx0">
+      <bpmn:text>Input: "order"
+Output: "set ingredients"
+"set  ingredients" are couples of ingredients &amp; value in unit</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_05yd8eh" sourceRef="Activity_1jzr0f8" targetRef="TextAnnotation_0md6tx0" />
+    <bpmn:textAnnotation id="TextAnnotation_1xr9vs7">
+      <bpmn:text>Input: Ingred..
+Output: "stock values of the ingredients"</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1a96ijv" sourceRef="Activity_1420gd0" targetRef="TextAnnotation_1xr9vs7" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0mrvuty">
+      <bpmndi:BPMNShape id="Participant_1r74pk4_di" bpmnElement="Participant_1r74pk4" isHorizontal="true">
+        <dc:Bounds x="129" y="49" width="661" height="540" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0aoh001_di" bpmnElement="Event_0aoh001">
+        <dc:Bounds x="183" y="295" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Flow_1kr7cxg_di" bpmnElement="Flow_1kr7cxg">
+        <dc:Bounds x="299" y="141" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="297" y="119" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Flow_19yz5dm_di" bpmnElement="Flow_19yz5dm">
+        <dc:Bounds x="479" y="141" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="474" y="112" width="60" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wht1xx_di" bpmnElement="Event_0wht1xx">
+        <dc:Bounds x="662" y="295" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jzr0f8_di" bpmnElement="Activity_1jzr0f8">
+        <dc:Bounds x="274" y="273" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1420gd0_di" bpmnElement="Activity_1420gd0">
+        <dc:Bounds x="454" y="273" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0md6tx0_di" bpmnElement="TextAnnotation_0md6tx0">
+        <dc:Bounds x="274" y="396" width="100" height="124" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1xr9vs7_di" bpmnElement="TextAnnotation_1xr9vs7">
+        <dc:Bounds x="454" y="396" width="100" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1mowbgr_di" bpmnElement="Flow_1mowbgr">
+        <di:waypoint x="374" y="313" />
+        <di:waypoint x="454" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nqzds2_di" bpmnElement="Flow_1nqzds2">
+        <di:waypoint x="219" y="313" />
+        <di:waypoint x="274" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_021k5zr_di" bpmnElement="DataOutputAssociation_021k5zr">
+        <di:waypoint x="319" y="273" />
+        <di:waypoint x="319" y="191" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_0wvmfp4_di" bpmnElement="DataInputAssociation_0wvmfp4">
+        <di:waypoint x="334" y="191" />
+        <di:waypoint x="334" y="273" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1lbavql_di" bpmnElement="DataOutputAssociation_1lbavql">
+        <di:waypoint x="494" y="273" />
+        <di:waypoint x="494" y="191" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1v056gs_di" bpmnElement="DataInputAssociation_1v056gs">
+        <di:waypoint x="514" y="191" />
+        <di:waypoint x="514" y="273" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_05yd8eh_di" bpmnElement="Association_05yd8eh">
+        <di:waypoint x="324" y="353" />
+        <di:waypoint x="324" y="396" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1a96ijv_di" bpmnElement="Association_1a96ijv">
+        <di:waypoint x="504" y="353" />
+        <di:waypoint x="504" y="396" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ojn8ns_di" bpmnElement="Flow_0ojn8ns">
+        <di:waypoint x="554" y="313" />
+        <di:waypoint x="662" y="313" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0w70rau" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <bpmn:collaboration id="Collaboration_0mwbv6h">
+    <bpmn:participant id="Participant_0wkqmmm" name="Re-Ordering Sub-Process" processRef="Process_15br24y" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_15br24y" isExecutable="true">
+    <bpmn:serviceTask id="Activity_0vzwzs6" name="Reorder Stock Levels missing ingredients">
+      <bpmn:incoming>Flow_029dxah</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bhqg0i</bpmn:outgoing>
+      <bpmn:property id="Property_0gqn29z" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1f3p192">
+        <bpmn:sourceRef>Flow_1o2lpgy</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0gqn29z</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0bi4gx9">
+        <bpmn:targetRef>Flow_1o2lpgy</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_0wq2il9">
+      <bpmn:incoming>Flow_1bhqg0i</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="Event_1hcfdfe" name="Every Thursday at 23:00 (night Job)">
+      <bpmn:outgoing>Flow_029dxah</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1g4qc3e" />
+    </bpmn:startEvent>
+    <bpmn:businessRuleTask id="Activity_14mubgg" name="Reorder Stock" camunda:decisionRef="ReorderStock">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_3rcadna" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:property id="Property_05v2zzw" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_174m2dw">
+        <bpmn:sourceRef>Flow_0z2x073</bpmn:sourceRef>
+        <bpmn:targetRef>Property_05v2zzw</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0ijl7ep">
+        <bpmn:targetRef>Flow_1o2lpgy</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0cionlf">
+        <bpmn:targetRef>Flow_0z2x073</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:businessRuleTask>
+    <bpmn:dataStoreReference id="Flow_1o2lpgy" name="Stock Orders to be Placed DB" />
+    <bpmn:dataStoreReference id="Flow_0z2x073" name="Stock Mgmt System" />
+    <bpmn:sequenceFlow id="Flow_029dxah" sourceRef="Event_1hcfdfe" targetRef="Activity_0vzwzs6" />
+    <bpmn:sequenceFlow id="Flow_1bhqg0i" sourceRef="Activity_0vzwzs6" targetRef="Event_0wq2il9" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0mwbv6h">
+      <bpmndi:BPMNShape id="Participant_0wkqmmm_di" bpmnElement="Participant_0wkqmmm" isHorizontal="true">
+        <dc:Bounds x="125" y="90" width="770" height="460" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0vzwzs6_di" bpmnElement="Activity_0vzwzs6">
+        <dc:Bounds x="576" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wq2il9_di" bpmnElement="Event_0wq2il9">
+        <dc:Bounds x="748" y="272" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1hcfdfe_di" bpmnElement="Event_1hcfdfe">
+        <dc:Bounds x="248" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="227" y="315" width="78" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14mubgg_di" bpmnElement="Activity_14mubgg">
+        <dc:Bounds x="376" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Flow_1o2lpgy_di" bpmnElement="Flow_1o2lpgy">
+        <dc:Bounds x="501" y="395" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="488" y="452" width="77" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Flow_0z2x073_di" bpmnElement="Flow_0z2x073">
+        <dc:Bounds x="401" y="135" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="396" y="106" width="60" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_029dxah_di" bpmnElement="Flow_029dxah">
+        <di:waypoint x="284" y="290" />
+        <di:waypoint x="576" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bhqg0i_di" bpmnElement="Flow_1bhqg0i">
+        <di:waypoint x="676" y="290" />
+        <di:waypoint x="748" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1f3p192_di" bpmnElement="DataInputAssociation_1f3p192">
+        <di:waypoint x="551" y="430" />
+        <di:waypoint x="626" y="430" />
+        <di:waypoint x="626" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0bi4gx9_di" bpmnElement="DataOutputAssociation_0bi4gx9">
+        <di:waypoint x="606" y="330" />
+        <di:waypoint x="606" y="410" />
+        <di:waypoint x="551" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_174m2dw_di" bpmnElement="DataInputAssociation_174m2dw">
+        <di:waypoint x="416" y="185" />
+        <di:waypoint x="416" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0ijl7ep_di" bpmnElement="DataOutputAssociation_0ijl7ep">
+        <di:waypoint x="425" y="330" />
+        <di:waypoint x="425" y="420" />
+        <di:waypoint x="501" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0cionlf_di" bpmnElement="DataOutputAssociation_0cionlf">
+        <di:waypoint x="430" y="250" />
+        <di:waypoint x="432" y="185" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
