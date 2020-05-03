@@ -13,7 +13,7 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1tkuudh" sourceRef="Event_1hcfdfe" targetRef="Activity_0pztdi3" />
     <bpmn:sequenceFlow id="Flow_17ppwiv" sourceRef="Activity_14mubgg" targetRef="Gateway_0sihmh1" />
-    <bpmn:businessRuleTask id="Activity_14mubgg" name="Reorder Stock" camunda:resultVariable="validationResult" camunda:decisionRef="ReorderStock" camunda:mapDecisionResult="singleResult">
+    <bpmn:businessRuleTask id="Activity_14mubgg" name="Reorder Stock" camunda:resultVariable="validationResult" camunda:decisionRef="DecisionReorderStock" camunda:mapDecisionResult="singleResult">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="SaltQuantity">
@@ -79,24 +79,21 @@
 for (i=0; i &lt; object.ingredients.length; i++){
 if (object.ingredients[i].ingredient.localeCompare("ham") == 0) {
 HamQuantity = object.ingredients [i].quantity;
-} )
-</camunda:script>
+} )</camunda:script>
             </camunda:outputParameter>
             <camunda:outputParameter name="ButterQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 for (i=0; i &lt; object.ingredients.length; i++){
 if (object.ingredients[i].ingredient.localeCompare("butter") == 0) {
 HamQuantity = object.ingredients [i].quantity;
-} )
-</camunda:script>
+} )</camunda:script>
             </camunda:outputParameter>
             <camunda:outputParameter name="SaltQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 for (i=0; i &lt; object.ingredients.length; i++){
 if (object.ingredients[i].ingredient.localeCompare("salt") == 0) {
 HamQuantity = object.ingredients[i].quantity;
-} )
-</camunda:script>
+} )</camunda:script>
             </camunda:outputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
