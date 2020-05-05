@@ -121,6 +121,9 @@ orderId=object.id;</camunda:script>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_19bdte3</bpmn:incoming>
       <bpmn:outgoing>Flow_0axulgo</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0999vos">
+        <bpmn:targetRef>Flow_1nxj750</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:businessRuleTask>
     <bpmn:exclusiveGateway id="Gateway_0sxrj9f" name="Order Valid?">
       <bpmn:incoming>Flow_0axulgo</bpmn:incoming>
@@ -213,7 +216,7 @@ orderId=object.id;</camunda:script>
       <bpmn:incoming>Flow_0ltztpl</bpmn:incoming>
       <bpmn:outgoing>Flow_1wjtc9m</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:subProcess id="Activity_094f25q" name="Incident Management Process">
+    <bpmn:subProcess id="Activity_094f25q" name="Incident Management Chatbot">
       <bpmn:incoming>Flow_03865ia</bpmn:incoming>
       <bpmn:outgoing>Flow_1ihappa</bpmn:outgoing>
       <bpmn:property id="Property_1qd4a3p" name="__targetRef_placeholder" />
@@ -221,6 +224,13 @@ orderId=object.id;</camunda:script>
         <bpmn:sourceRef>Flow_0vbsi2t</bpmn:sourceRef>
         <bpmn:targetRef>Property_1qd4a3p</bpmn:targetRef>
       </bpmn:dataInputAssociation>
+      <bpmn:dataInputAssociation id="DataInputAssociation_0zud9yo">
+        <bpmn:sourceRef>Flow_1nxj750</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1qd4a3p</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1vwjvb1">
+        <bpmn:targetRef>Flow_1nxj750</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:subProcess>
     <bpmn:subProcess id="Activity_072z7jg" name="Reserve needed Stocks">
       <bpmn:incoming>Flow_0v86phq</bpmn:incoming>
@@ -278,6 +288,7 @@ orderId=object.id;</camunda:script>
     <bpmn:sequenceFlow id="Flow_03bx0fv" sourceRef="Activity_1j5vs2u" targetRef="Activity_0ew9ynt" />
     <bpmn:sequenceFlow id="Flow_0ltztpl" sourceRef="Event_17m5nnu" targetRef="Activity_1g33ys9" />
     <bpmn:sequenceFlow id="Flow_1wjtc9m" sourceRef="Activity_1g33ys9" targetRef="Activity_0arydmw" />
+    <bpmn:dataStoreReference id="Flow_1nxj750" name="Incident List" />
   </bpmn:process>
   <bpmn:process id="Process_0m0c358" isExecutable="false" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -316,10 +327,10 @@ orderId=object.id;</camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_03865ia_di" bpmnElement="Flow_03865ia">
         <di:waypoint x="660" y="645" />
-        <di:waypoint x="660" y="550" />
-        <di:waypoint x="710" y="550" />
+        <di:waypoint x="660" y="570" />
+        <di:waypoint x="710" y="570" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="668" y="603" width="15" height="14" />
+          <dc:Bounds x="668" y="610" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_07u8thq_di" bpmnElement="MessageFlow_07u8thq">
@@ -605,6 +616,25 @@ orderId=object.id;</camunda:script>
         <di:waypoint x="1100" y="970" />
         <di:waypoint x="1100" y="880" />
         <di:waypoint x="1180" y="880" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Flow_1nxj750_di" bpmnElement="Flow_1nxj750">
+        <dc:Bounds x="505" y="505" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="500" y="481" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0999vos_di" bpmnElement="DataOutputAssociation_0999vos">
+        <di:waypoint x="530" y="630" />
+        <di:waypoint x="530" y="555" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_0zud9yo_di" bpmnElement="DataInputAssociation_0zud9yo">
+        <di:waypoint x="555" y="540" />
+        <di:waypoint x="710" y="540" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1vwjvb1_di" bpmnElement="DataOutputAssociation_1vwjvb1">
+        <di:waypoint x="710" y="520" />
+        <di:waypoint x="650" y="520" />
+        <di:waypoint x="555" y="520" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
