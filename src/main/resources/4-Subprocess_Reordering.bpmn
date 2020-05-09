@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0w70rau" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0w70rau" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
   <bpmn:collaboration id="Collaboration_0mwbv6h">
     <bpmn:participant id="Participant_0wkqmmm" name="Subprocess_Reordering" processRef="subprocess_reordering" />
   </bpmn:collaboration>
@@ -45,7 +45,7 @@
       <bpmn:outgoing>Flow_1l7noc7</bpmn:outgoing>
       <bpmn:outgoing>Flow_1n8v8ak</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_0vzwzs6" name="Reorder Stock Levels">
+    <bpmn:userTask id="Activity_0vzwzs6" name="Reorder Missing Ingredients and Confirm upon receival">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="reorderHam" label="Reorder Ham? (10kg)" type="string" />
@@ -153,6 +153,26 @@ FlowerQuantity = object.stocklevels[i].stocklevel;
     </bpmn:serviceTask>
     <bpmn:dataStoreReference id="Flow_0z2x073" name="Stock Mgmt System" />
     <bpmn:sequenceFlow id="SequenceFlow_18tn0j7" sourceRef="Activity_0pztdi3" targetRef="Activity_14mubgg" />
+    <bpmn:textAnnotation id="TextAnnotation_11368v3">
+      <bpmn:text>Input: No input
+Output: Current stock levels</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_19sd9zv" sourceRef="Activity_0pztdi3" targetRef="TextAnnotation_11368v3" />
+    <bpmn:textAnnotation id="TextAnnotation_1euazne">
+      <bpmn:text>Input: Current stock levels
+Output: Reorder necessary? if yes, which ingredients must be reordered</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0dhvsno" sourceRef="Activity_14mubgg" targetRef="TextAnnotation_1euazne" />
+    <bpmn:textAnnotation id="TextAnnotation_1nwerh0">
+      <bpmn:text>User receives a list of ingredients to be ordered. Once the order has been received the user completes the task</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0ompnkk" sourceRef="Activity_0vzwzs6" targetRef="TextAnnotation_1nwerh0" />
+    <bpmn:textAnnotation id="TextAnnotation_0o2r0v5">
+      <bpmn:text>Input: List of ingredients which had to be reordered
+Operation: Reordered quantites are added to the stock DB
+Output: no output</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0rn3qg5" sourceRef="Activity_14cshbx" targetRef="TextAnnotation_0o2r0v5" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0mwbv6h">
@@ -233,6 +253,34 @@ FlowerQuantity = object.stocklevels[i].stocklevel;
       <bpmndi:BPMNEdge id="SequenceFlow_18tn0j7_di" bpmnElement="SequenceFlow_18tn0j7">
         <di:waypoint x="450" y="290" />
         <di:waypoint x="506" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_11368v3_di" bpmnElement="TextAnnotation_11368v3">
+        <dc:Bounds x="350" y="150" width="100" height="54" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_19sd9zv_di" bpmnElement="Association_19sd9zv">
+        <di:waypoint x="400" y="250" />
+        <di:waypoint x="400" y="204" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1euazne_di" bpmnElement="TextAnnotation_1euazne">
+        <dc:Bounds x="506" y="122" width="99" height="110" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0dhvsno_di" bpmnElement="Association_0dhvsno">
+        <di:waypoint x="556" y="250" />
+        <di:waypoint x="556" y="232" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1nwerh0_di" bpmnElement="TextAnnotation_1nwerh0">
+        <dc:Bounds x="640" y="350" width="220" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0ompnkk_di" bpmnElement="Association_0ompnkk">
+        <di:waypoint x="804" y="329" />
+        <di:waypoint x="782" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0o2r0v5_di" bpmnElement="TextAnnotation_0o2r0v5">
+        <dc:Bounds x="1070" y="350" width="146" height="110" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0rn3qg5_di" bpmnElement="Association_0rn3qg5">
+        <di:waypoint x="1046" y="327" />
+        <di:waypoint x="1075" y="350" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
