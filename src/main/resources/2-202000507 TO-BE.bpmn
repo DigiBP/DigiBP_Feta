@@ -287,6 +287,9 @@ orderId=object.id;</camunda:script>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0qh8oke">
         <bpmn:targetRef>Flow_1lfke2x</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0w7v5mg">
+        <bpmn:targetRef>Flow_16s64u8</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
     <bpmn:dataObjectReference id="Flow_16s64u8" name="Google Sheet Order details" dataObjectRef="Flow_0yxzjf1" />
     <bpmn:dataObject id="Flow_0yxzjf1" />
@@ -650,6 +653,11 @@ orderId=object.id;</camunda:script>
         <di:waypoint x="714" y="513" />
         <di:waypoint x="660" y="470" />
         <di:waypoint x="468" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0w7v5mg_di" bpmnElement="DataOutputAssociation_0w7v5mg">
+        <di:waypoint x="920" y="640" />
+        <di:waypoint x="600" y="640" />
+        <di:waypoint x="468" y="493" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
