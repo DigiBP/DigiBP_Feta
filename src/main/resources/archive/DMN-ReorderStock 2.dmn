@@ -1,0 +1,1170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_00qrpjd" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
+  <decision id="Decision_ReorderStock" name="Reorder Stock">
+    <extensionElements>
+      <biodi:bounds x="150" y="80" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="HamQuantity" camunda:inputVariable="HamQuantity">
+        <inputExpression id="inputExpression_1" typeRef="long" expressionLanguage="JavaScript">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1f86174" label="ButterQuantity" camunda:inputVariable="ButterQuantity">
+        <inputExpression id="LiteralExpression_0ilfl26" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0nd0qrj" label="SaltQuantity" camunda:inputVariable="SaltQuantity">
+        <inputExpression id="LiteralExpression_0shjnqb" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_13sou1i" label="SugarQuantity" camunda:inputVariable="SugarQuantity">
+        <inputExpression id="LiteralExpression_1o5f39v" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1s06vb1" label="FlowerQuantity" camunda:inputVariable="FlowerQuantity">
+        <inputExpression id="LiteralExpression_09zfzie" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Reorder?" name="reorderRequired" typeRef="boolean" />
+      <output id="OutputClause_1nl3knh" label="ReorderHam" name="reorderHam" typeRef="boolean" />
+      <output id="OutputClause_08ambf3" label="ReorderButter" name="reorderButter" typeRef="boolean" />
+      <output id="OutputClause_0ydv9cv" label="ReorderSalt" name="reorderSalt" typeRef="boolean" />
+      <output id="OutputClause_097htns" label="ReorderSugar" name="reorderSugar" typeRef="boolean" />
+      <output id="OutputClause_06beq4t" label="ReorderFlower" name="reorderFlower" typeRef="boolean" />
+      <rule id="DecisionRule_0rlkbdz">
+        <description>5</description>
+        <inputEntry id="UnaryTests_196qy16">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nhx0hx">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w2gg40">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kau100">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05rx2pf">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1gq2e2a">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_14bj1z2">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0km1j3t">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1usxzk3">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09lcq4v">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_16frvlk">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1n05rxy">
+        <description>4</description>
+        <inputEntry id="UnaryTests_0b6mxf8">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ymaddz">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0maegdu">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04wt58f">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1oknfp9">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1tx1fri">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1uxdasz">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_02spz5k">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1f0lr4f">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0q0h0d8">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_17h85rg">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0z942b0">
+        <description></description>
+        <inputEntry id="UnaryTests_1o0fn8o">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04tcgrp">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rcvzu3">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1sefjpi">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1m15s3s">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1kkv46a">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0y3ebz8">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ob330w">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0pl2cvk">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0f8kg4w">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0r5co7d">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_071pq3r">
+        <description></description>
+        <inputEntry id="UnaryTests_04suowp">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1sa3xjj">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1u74g79">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1g7o4uo">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1227b29">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0tt479p">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_07x6y8h">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0aae7nj">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0j1yswu">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1v0y1fb">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1fsywmh">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0s3zey0">
+        <description></description>
+        <inputEntry id="UnaryTests_01ya7e0">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ims2oy">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1o5bqq0">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0x3ul8m">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16z451u">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_10e1fyx">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0n66xu7">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0qxrvzu">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_093xuye">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0u0npbv">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1vv8cx5">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qaxtvz">
+        <inputEntry id="UnaryTests_14pahi0">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04gtolo">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12ppp55">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0aw4b7e">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ds0kit">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1176lp1">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_003zlvq">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0kszlsv">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1fcq55p">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_10xiizs">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cr3c17">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0arwuqp">
+        <description>3</description>
+        <inputEntry id="UnaryTests_1osfnc0">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_170ah3x">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1i3hms2">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1i94a21">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0akjhaw">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0msvy47">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_01a4nqj">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_12fxll7">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0pg4qs9">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11a7vs2">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0o9vuia">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_01gq3wr">
+        <inputEntry id="UnaryTests_1t796wc">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0trv47f">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1akkurz">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mo29y9">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12560yv">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nljc6z">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19vbkyi">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_17jfzeo">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11g0758">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0jhw2ft">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ou45zt">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_01s9e9t">
+        <inputEntry id="UnaryTests_0f3v67b">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rf0vjq">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c9pvt3">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14b94iq">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0m7odjx">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07221ou">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0do4rhl">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0gjghg5">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_176stuu">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cd2lus">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0nmzwcp">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_018ws0a">
+        <inputEntry id="UnaryTests_1ukwrl1">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1cst0yo">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wsyyxl">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ll0acs">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00p4ckz">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05hm10v">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1eezs0d">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1mtws19">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1egkyhw">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19s4xlo">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1rjgq4l">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ymw4tx">
+        <inputEntry id="UnaryTests_1su1oqs">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0668m3u">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bynye4">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10yjwof">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1myti8j">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0jx56ua">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0jzfpuh">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11ume9w">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1mam0nh">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0yf17v9">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_04mw5hc">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0l8id01">
+        <inputEntry id="UnaryTests_1l9z4m9">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1isfuss">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02ut0st">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19hctwo">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ajl3s4">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1dfn0xv">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1u36kpu">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0uts71o">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0wyofoj">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_10v0u6u">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0uvyvz7">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0c2x7rj">
+        <inputEntry id="UnaryTests_035p0pr">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0tokhii">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uwb1u6">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1i8snse">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1fb0gky">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19odr9b">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1x6dcwd">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0v5f8jw">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_00919bt">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1pc3jqb">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0em13cm">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ks5t1s">
+        <inputEntry id="UnaryTests_0308u5c">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cv681q">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12gc1tm">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1u7jhw8">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mpsawy">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17n3h9f">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11mse3t">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0o5mhek">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1hzajrs">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0grssfx">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0u6xi26">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_10v0y0w">
+        <inputEntry id="UnaryTests_05twlpx">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06e73si">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bxns6a">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_125gxqz">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ocvbtj">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0romlfi">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0dxutm3">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18aibxw">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1abi7s1">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1yptloz">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_004x2yl">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1njiz0m">
+        <inputEntry id="UnaryTests_027clfq">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03mw542">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16cdlwe">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07z4x9u">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jbgdsc">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1sq4eql">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1jkb7ag">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_04blffg">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0v7rkio">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cz71v6">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05vfu3c">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1nxsnd3">
+        <description>2</description>
+        <inputEntry id="UnaryTests_0ctpzn7">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1f5aerr">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10oov0i">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0u49ub3">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0o2ho54">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07ot3ij">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0vu61zm">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1sebcs9">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1lq58ut">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1i0zz9b">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_04rzxz0">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1oaz8aj">
+        <inputEntry id="UnaryTests_0nxazk3">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r41ojo">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10tvc1m">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bw1mw0">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qwjh1f">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jx7q3c">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0k3y61j">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1d9dk5l">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ezkn94">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_00p7ynj">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_040emjh">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0jugshp">
+        <inputEntry id="UnaryTests_0nrx7ku">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14sz205">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mwmz8f">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15a92jp">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0usbywd">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wej7vj">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0q9rery">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1kvjm3m">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1x99ayc">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0j4idr2">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ovsw6i">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1suln1h">
+        <inputEntry id="UnaryTests_0nz30ci">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ckf8b7">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xs2fff">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05psgtt">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1n0n1op">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18qcxgq">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11dnupx">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1a75fp2">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18k0i70">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_190hy3g">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cszbmt">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0j9id0r">
+        <inputEntry id="UnaryTests_154pk3l">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0u76q1u">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mgv04q">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1t23f01">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13fwdtx">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0bokom4">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_16ey1nf">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0dlnbe0">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0vwdym1">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0isw1qz">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0t2f6mx">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0n4ytfj">
+        <inputEntry id="UnaryTests_1qfuqqq">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r2vpik">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14npvsj">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_176u0s1">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10m4640">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19rh4rl">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1xkhczg">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1960oeh">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_03up2o9">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05f6e64">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1gi82zf">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1oxzidg">
+        <inputEntry id="UnaryTests_0hx1us8">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1nhvmcp">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00v4cq2">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10ie9pm">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_016wjni">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0a234oa">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0s5elqb">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_00n9kp2">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_069uut1">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05k4qte">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0zrxrxh">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17v96st">
+        <inputEntry id="UnaryTests_055mnum">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0g2ucug">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11y3b83">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0j3mhs3">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06mq93b">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13r58a2">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0858zlt">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0duhddi">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_10tcooa">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ca52yn">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1gx89sm">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17ujgvg">
+        <inputEntry id="UnaryTests_0bhfbal">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19irwek">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1vmy1wx">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0f4gsg7">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sbtiia">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0an92g7">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_031959e">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0vxqk9a">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18sghme">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0zpl7v6">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1llzvle">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_177n5fb">
+        <inputEntry id="UnaryTests_1vtgk65">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0q2ka7l">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12ayct2">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0korzq6">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0icvnme">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0u1rh75">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1wk55fo">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0k3pshi">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0vmbcon">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1myvdet">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_16hugow">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0njs9ql">
+        <description>1</description>
+        <inputEntry id="UnaryTests_02tja84">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0paybt0">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14sj1gv">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0beoqpv">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1yorl18">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0to4eg9">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0tdrbwr">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0diptdh">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1bd4xc0">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0zykbak">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rw3iyq">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1g28alf">
+        <inputEntry id="UnaryTests_0es2flh">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xof7fr">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0q6ep2c">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hpv9s8">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15u5tnt">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05b7tj9">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18nxr18">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_00dqbo1">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0g34rm6">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_037d6zk">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1v37im2">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wcbw5p">
+        <inputEntry id="UnaryTests_0v18w5q">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1uqxtc7">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0db8aqa">
+          <text>&lt; 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mf5eam">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01gmatp">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08j1i4r">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_00ezhtm">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1akqrmq">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18z9xfq">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1euur71">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0wcwqvn">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_14nm6dq">
+        <inputEntry id="UnaryTests_119fzdu">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ied92c">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ncx1cb">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0g7oy00">
+          <text>&lt; 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05eriu8">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0dsstzv">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1g0truc">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1390yoz">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_17s29q9">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0s5wxgd">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_00rs5rc">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_02swim6">
+        <inputEntry id="UnaryTests_184j56i">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xhweft">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nmjyaf">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1e4tm0d">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1s2jqjy">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0kf508y">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1fv9akw">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_10auqrx">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1xmdz6y">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1rb59io">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1bcm097">
+          <text>"TRUE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1hpn37y">
+        <description>0</description>
+        <inputEntry id="UnaryTests_0kmzdp5">
+          <text>&gt;= 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1airj26">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ddl4ti">
+          <text>&gt;= 8000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15uh4j9">
+          <text>&gt;= 9000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1vippte">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0d4pmzy">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_16vgy1v">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0sjmukw">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0f5o1ws">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0l5d2sd">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_08hzzrg">
+          <text>"FALSE"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

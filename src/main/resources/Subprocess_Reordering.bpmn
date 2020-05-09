@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0w70rau" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
+  <bpmn:collaboration id="Collaboration_0mwbv6h">
+    <bpmn:participant id="Participant_0wkqmmm" name="Subprocess_Reordering" processRef="subprocess_reordering" />
+  </bpmn:collaboration>
+  <bpmn:process id="subprocess_reordering" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_1l7noc7" name="Reorder necessary" sourceRef="Gateway_0sihmh1" targetRef="Activity_0vzwzs6">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${reorderRequired == "TRUE"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1n8v8ak" name="No Reorder neccesary" sourceRef="Gateway_0sihmh1" targetRef="Event_0wq2il9">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${reorderRequired == "FALSE"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1tkuudh" sourceRef="Event_1hcfdfe" targetRef="Activity_0pztdi3" />
+    <bpmn:businessRuleTask id="Activity_14mubgg" name="Determine if reorder necessary" camunda:resultVariable="reorderingResult" camunda:decisionRef="Decision_ReorderStock" camunda:mapDecisionResult="singleResult">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="SaltQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(SaltQuantity)</camunda:script>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="ButterQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(ButterQuantity)</camunda:script>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="HamQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(HamQuantity)</camunda:script>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="SugarQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(SugarQuantity)</camunda:script>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="FlowerQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(FlowerQuantity)</camunda:script>
+          </camunda:inputParameter>
+          <camunda:outputParameter name="reorderRequired">${reorderingResult.reorderRequired}</camunda:outputParameter>
+          <camunda:outputParameter name="reorderHam">${reorderingResult.reorderHam}</camunda:outputParameter>
+          <camunda:outputParameter name="reorderButter">${reorderingResult.reorderButter}</camunda:outputParameter>
+          <camunda:outputParameter name="reorderSalt">${reorderingResult.reorderSalt}</camunda:outputParameter>
+          <camunda:outputParameter name="reorderSugar">${reorderingResult.reorderSugar}</camunda:outputParameter>
+          <camunda:outputParameter name="reorderFlower">${reorderingResult.reorderFlower}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_18tn0j7</bpmn:incoming>
+      <bpmn:outgoing>Flow_19i15qd</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:exclusiveGateway id="Gateway_0sihmh1">
+      <bpmn:incoming>Flow_19i15qd</bpmn:incoming>
+      <bpmn:outgoing>Flow_1l7noc7</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1n8v8ak</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_0vzwzs6" name="Reorder Stock Levels">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="reorderHam" label="Reorder Ham? (10kg)" type="string" />
+          <camunda:formField id="reorderButter" label="Reorder Butter? (30kg)" type="string" />
+          <camunda:formField id="reorderSalt" label="Reorder Salt? (20kg)" type="string" />
+          <camunda:formField id="reorderSugar" label="Reorder Sugar? (22kg)" type="string" />
+          <camunda:formField id="reorderFlower" label="Reorder Flower? (30kg)" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1l7noc7</bpmn:incoming>
+      <bpmn:outgoing>Flow_1k98ukf</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_0pztdi3" name="Get Current Stock Levels">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/4u9t39putyawgy1ghi4utxpgvtb8aywe</camunda:inputParameter>
+            <camunda:outputParameter name="HamQuantity">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+for (i=0; i &lt; object.stocklevels.length; i++){
+if (object.stocklevels[i].ingredient.localeCompare("ham") == 0) {
+HamQuantity = object.stocklevels[i].stocklevel;
+}}</camunda:script>
+            </camunda:outputParameter>
+            <camunda:outputParameter name="ButterQuantity">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+for (i=0; i &lt; object.stocklevels.length; i++){
+if (object.stocklevels[i].ingredient.localeCompare("butter") == 0) {
+ButterQuantity = object.stocklevels[i].stocklevel;
+}}</camunda:script>
+            </camunda:outputParameter>
+            <camunda:outputParameter name="SaltQuantity">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+for (i=0; i &lt; object.stocklevels.length; i++){
+if (object.stocklevels[i].ingredient.localeCompare("salt") == 0) {
+SaltQuantity = object.stocklevels[i].stocklevel;
+}}</camunda:script>
+            </camunda:outputParameter>
+            <camunda:outputParameter name="SugarQuantity">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+for (i=0; i &lt; object.stocklevels.length; i++){
+if (object.stocklevels[i].ingredient.localeCompare("sugar") == 0) {
+SugarQuantity = object.stocklevels[i].stocklevel;
+}}</camunda:script>
+            </camunda:outputParameter>
+            <camunda:outputParameter name="FlowerQuantity">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+for (i=0; i &lt; object.stocklevels.length; i++){
+if (object.stocklevels[i].ingredient.localeCompare("flower") == 0) {
+FlowerQuantity = object.stocklevels[i].stocklevel;
+}}</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1tkuudh</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_18tn0j7</bpmn:outgoing>
+      <bpmn:property id="Property_0qs8alg" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_12w2g7l">
+        <bpmn:sourceRef>Flow_0z2x073</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0qs8alg</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="Event_1hcfdfe" name="Every Thursday at 23:00 (night Job)">
+      <bpmn:outgoing>Flow_1tkuudh</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_19i15qd" sourceRef="Activity_14mubgg" targetRef="Gateway_0sihmh1" />
+    <bpmn:endEvent id="Event_0wq2il9">
+      <bpmn:incoming>Flow_1n8v8ak</bpmn:incoming>
+      <bpmn:incoming>Flow_0dru3y4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1k98ukf" sourceRef="Activity_0vzwzs6" targetRef="Activity_14cshbx" />
+    <bpmn:sequenceFlow id="Flow_0dru3y4" sourceRef="Activity_14cshbx" targetRef="Event_0wq2il9" />
+    <bpmn:serviceTask id="Activity_14cshbx" name="Update Stock levels">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/zi7yroaxe5tp3533xzin1h5j2io567g6</camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
+    "reorderHam":reorderHam,
+    "reorderButter":reorderButter,
+    "reorderSalt":reorderSalt,
+    "reorderSugar":reorderSugar,
+    "reorderFlower":reorderFlower
+});</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1k98ukf</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dru3y4</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1kptn6q">
+        <bpmn:targetRef>Flow_0z2x073</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:dataStoreReference id="Flow_0z2x073" name="Stock Mgmt System" />
+    <bpmn:sequenceFlow id="SequenceFlow_18tn0j7" sourceRef="Activity_0pztdi3" targetRef="Activity_14mubgg" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0mwbv6h">
+      <bpmndi:BPMNShape id="Participant_0wkqmmm_di" bpmnElement="Participant_0wkqmmm" isHorizontal="true">
+        <dc:Bounds x="125" y="90" width="1235" height="460" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wq2il9_di" bpmnElement="Event_0wq2il9">
+        <dc:Bounds x="1132" y="272" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14mubgg_di" bpmnElement="Activity_14mubgg">
+        <dc:Bounds x="506" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Flow_0z2x073_di" bpmnElement="Flow_0z2x073">
+        <dc:Bounds x="375" y="395" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="370" y="454.5" width="59" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0sihmh1_di" bpmnElement="Gateway_0sihmh1" isMarkerVisible="true">
+        <dc:Bounds x="665" y="265" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1l7noc7_di" bpmnElement="Flow_1l7noc7">
+        <di:waypoint x="715" y="290" />
+        <di:waypoint x="796" y="290" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="730" y="306" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n8v8ak_di" bpmnElement="Flow_1n8v8ak">
+        <di:waypoint x="690" y="265" />
+        <di:waypoint x="690" y="190" />
+        <di:waypoint x="1150" y="190" />
+        <di:waypoint x="1150" y="272" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="872" y="156" width="58" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tkuudh_di" bpmnElement="Flow_1tkuudh">
+        <di:waypoint x="284" y="290" />
+        <di:waypoint x="350" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_15iirmd_di" bpmnElement="Activity_0vzwzs6">
+        <dc:Bounds x="796" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1le9xjc_di" bpmnElement="Activity_0pztdi3">
+        <dc:Bounds x="350" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataInputAssociation_12w2g7l_di" bpmnElement="DataInputAssociation_12w2g7l">
+        <di:waypoint x="400" y="395" />
+        <di:waypoint x="400" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0slpri7_di" bpmnElement="Event_1hcfdfe">
+        <dc:Bounds x="248" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="227" y="315" width="78" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_19i15qd_di" bpmnElement="Flow_19i15qd">
+        <di:waypoint x="606" y="290" />
+        <di:waypoint x="665" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1k98ukf_di" bpmnElement="Flow_1k98ukf">
+        <di:waypoint x="896" y="290" />
+        <di:waypoint x="950" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dru3y4_di" bpmnElement="Flow_0dru3y4">
+        <di:waypoint x="1050" y="290" />
+        <di:waypoint x="1132" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1yjiblb_di" bpmnElement="Activity_14cshbx">
+        <dc:Bounds x="950" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1kptn6q_di" bpmnElement="DataOutputAssociation_1kptn6q">
+        <di:waypoint x="1000" y="330" />
+        <di:waypoint x="1000" y="425" />
+        <di:waypoint x="425" y="425" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_18tn0j7_di" bpmnElement="SequenceFlow_18tn0j7">
+        <di:waypoint x="450" y="290" />
+        <di:waypoint x="506" y="290" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
