@@ -20,10 +20,9 @@
         <bpmn:flowNodeRef>Activity_0cprer8</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_1ygs5wf</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1gwvtrw</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_18ct8kd</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_02qtoww</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1j669dj</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_14xr3lu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_18ct8kd</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_02qv65s" name="Baker">
         <bpmn:flowNodeRef>Event_0df25yl</bpmn:flowNodeRef>
@@ -250,13 +249,6 @@ orderId=object.id;</camunda:script>
       <bpmn:incoming>Flow_00lslar</bpmn:incoming>
       <bpmn:outgoing>Flow_0ly0748</bpmn:outgoing>
     </bpmn:manualTask>
-    <bpmn:subProcess id="Activity_18ct8kd" name="Payment process">
-      <bpmn:incoming>Flow_19hhsqh</bpmn:incoming>
-      <bpmn:outgoing>Flow_00lslar</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_0xpshcs">
-        <bpmn:targetRef>Flow_1li0xxy</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:subProcess>
     <bpmn:sequenceFlow id="Flow_19hhsqh" sourceRef="Gateway_1ygs5wf" targetRef="Activity_18ct8kd" />
     <bpmn:manualTask id="Activity_02qtoww" name="Update Order Form">
       <bpmn:incoming>Flow_0ly0748</bpmn:incoming>
@@ -274,11 +266,10 @@ orderId=object.id;</camunda:script>
     <bpmn:endEvent id="Event_1j669dj">
       <bpmn:incoming>Flow_0iqd01m</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:dataObjectReference id="Flow_1li0xxy" name="Receipt" dataObjectRef="Flow_1xg3gau" />
-    <bpmn:dataObject id="Flow_1xg3gau" />
-    <bpmn:boundaryEvent id="Event_14xr3lu" attachedToRef="Activity_18ct8kd">
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_075mdg6" />
-    </bpmn:boundaryEvent>
+    <bpmn:manualTask id="Activity_18ct8kd" name="Payment process">
+      <bpmn:incoming>Flow_19hhsqh</bpmn:incoming>
+      <bpmn:outgoing>Flow_00lslar</bpmn:outgoing>
+    </bpmn:manualTask>
     <bpmn:textAnnotation id="TextAnnotation_1g99gmz">
       <bpmn:text>*Can be changed to script (mark order as completed in the DB*</bpmn:text>
     </bpmn:textAnnotation>
@@ -403,17 +394,6 @@ orderId=object.id;</camunda:script>
         <di:waypoint x="1695" y="1093" />
         <di:waypoint x="1810" y="1093" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Flow_1li0xxy_di" bpmnElement="Flow_1li0xxy">
-        <dc:Bounds x="2262" y="1375" width="36" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2261" y="1435" width="38" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0xpshcs_di" bpmnElement="DataOutputAssociation_0xpshcs">
-        <di:waypoint x="2050" y="1290" />
-        <di:waypoint x="2050" y="1400" />
-        <di:waypoint x="2262" y="1400" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1v3najy_di" bpmnElement="Flow_1v3najy">
         <di:waypoint x="1590" y="1093" />
         <di:waypoint x="1645" y="1093" />
@@ -437,9 +417,6 @@ orderId=object.id;</camunda:script>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1b83s6a_di" bpmnElement="Activity_02qtoww">
         <dc:Bounds x="2420" y="1210" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0yb8kis_di" bpmnElement="Activity_18ct8kd">
-        <dc:Bounds x="2000" y="1210" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1f2gw0v_di" bpmnElement="Flow_1f2gw0v">
         <di:waypoint x="268" y="670" />
@@ -618,8 +595,8 @@ orderId=object.id;</camunda:script>
         <di:waypoint x="2330" y="1250" />
         <di:waypoint x="2420" y="1250" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0c3n9p4_di" bpmnElement="Event_14xr3lu">
-        <dc:Bounds x="1982" y="1272" width="36" height="36" />
+      <bpmndi:BPMNShape id="Activity_15g6gy9_di" bpmnElement="Activity_18ct8kd">
+        <dc:Bounds x="2000" y="1210" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
