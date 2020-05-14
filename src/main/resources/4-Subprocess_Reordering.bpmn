@@ -111,9 +111,6 @@ FlowerQuantity = object.stocklevels[i].stocklevel;
         <bpmn:targetRef>Property_0qs8alg</bpmn:targetRef>
       </bpmn:dataInputAssociation>
     </bpmn:serviceTask>
-    <bpmn:startEvent id="Event_1hcfdfe" name="Every Thursday at 23:00 (night Job)">
-      <bpmn:outgoing>Flow_1tkuudh</bpmn:outgoing>
-    </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_19i15qd" sourceRef="Activity_14mubgg" targetRef="Gateway_0sihmh1" />
     <bpmn:endEvent id="Event_0wq2il9">
       <bpmn:incoming>Flow_1n8v8ak</bpmn:incoming>
@@ -153,6 +150,12 @@ FlowerQuantity = object.stocklevels[i].stocklevel;
     </bpmn:serviceTask>
     <bpmn:dataStoreReference id="Flow_0z2x073" name="Stock Mgmt System" />
     <bpmn:sequenceFlow id="SequenceFlow_18tn0j7" sourceRef="Activity_0pztdi3" targetRef="Activity_14mubgg" />
+    <bpmn:startEvent id="Event_1hcfdfe" name="Every Thursday at 23:00 (night Job)">
+      <bpmn:outgoing>Flow_1tkuudh</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0nt250q">
+        <bpmn:timeDate xsi:type="bpmn:tFormalExpression" />
+      </bpmn:timerEventDefinition>
+    </bpmn:startEvent>
     <bpmn:textAnnotation id="TextAnnotation_11368v3">
       <bpmn:text>Input: No input
 Output: Current stock levels</bpmn:text>
@@ -224,12 +227,6 @@ Output: no output</bpmn:text>
         <di:waypoint x="400" y="395" />
         <di:waypoint x="400" y="330" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0slpri7_di" bpmnElement="Event_1hcfdfe">
-        <dc:Bounds x="248" y="272" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="227" y="315" width="78" height="40" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_19i15qd_di" bpmnElement="Flow_19i15qd">
         <di:waypoint x="606" y="290" />
         <di:waypoint x="665" y="290" />
@@ -282,6 +279,12 @@ Output: no output</bpmn:text>
         <di:waypoint x="1046" y="327" />
         <di:waypoint x="1075" y="350" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1janqja_di" bpmnElement="Event_1hcfdfe">
+        <dc:Bounds x="248" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="221" y="315" width="90" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
