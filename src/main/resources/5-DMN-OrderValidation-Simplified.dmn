@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_1esz7o6" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <decision id="Decision_orderValidation" name="Order Validation">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="InputClause_1aj2riu" label="Sandwich quantity" camunda:inputVariable="SandwichQuantity">
+        <inputExpression id="LiteralExpression_09j224e" typeRef="integer" expressionLanguage="JavaScript">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_06hkofe" label="Croissant quantity" camunda:inputVariable="CroissantQuantity">
+        <inputExpression id="LiteralExpression_0jwal3n" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1j64dhc" label="Pastery quantity" camunda:inputVariable="PasteryQuantity">
+        <inputExpression id="LiteralExpression_1yah6zo" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Valid" name="valid" typeRef="boolean" />
+      <output id="OutputClause_012cnej" label="Explanation" name="explanation" typeRef="string" />
+      <rule id="DecisionRule_0zoksln">
+        <description>"This order is valid"</description>
+        <inputEntry id="UnaryTests_0j6jrqn">
+          <text>&lt;= 150</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0raayn1">
+          <text>&lt;= 450</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ozhmk7">
+          <text>&lt;=300</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_028vnkr">
+          <text>"TRUE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0xbd2fu">
+          <text>"This order is valid"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1iso1w1">
+        <description>"DigiBakery cannot produce more than 150 sandwiches for one order"</description>
+        <inputEntry id="UnaryTests_0t2vkqo">
+          <text>&gt; 150</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0trofea">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kavy91">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18svivr">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ajhsdk">
+          <text>"DigiBakery cannot produce more than 150 sandwiches for one order"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ralgdz">
+        <description>"DigiBakery cannot produce more than 300 pastries for one order"</description>
+        <inputEntry id="UnaryTests_0fulru7">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1q98bj8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05lx6mj">
+          <text>&gt; 300</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1w9x7d4">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_06ryed0">
+          <text>"DigiBakery cannot produce more than 300 pastries for one order"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0sy7xhe">
+        <description>"DigiBakery cannot produce more than 450 croissants for one order"</description>
+        <inputEntry id="UnaryTests_1kzrsqq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01rat78">
+          <text>&gt; 450</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02etw93">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08uy9tp">
+          <text>"FALSE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rldkj4">
+          <text>"DigiBakery cannot produce more than 450 croissants for one order"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_024fjfr">
+        <inputEntry id="UnaryTests_1j15did">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w93whf">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1be7gj4">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ovmpoy">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0fckmjg">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
