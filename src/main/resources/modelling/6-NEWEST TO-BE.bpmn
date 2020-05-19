@@ -58,7 +58,9 @@
     <bpmn:sequenceFlow id="Flow_1rdi42o" sourceRef="Activity_0arydmw" targetRef="Activity_1j5vs2u" />
     <bpmn:sequenceFlow id="Flow_03bx0fv" sourceRef="Activity_1j5vs2u" targetRef="Activity_0ew9ynt" />
     <bpmn:sequenceFlow id="Flow_1v3najy" sourceRef="Activity_0ew9ynt" targetRef="Gateway_1jescqe" />
-    <bpmn:sequenceFlow id="Flow_18ef1gf" sourceRef="Gateway_1jescqe" targetRef="Activity_0cprer8" />
+    <bpmn:sequenceFlow id="Flow_18ef1gf" sourceRef="Gateway_1jescqe" targetRef="Activity_0cprer8">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${deliveryRequired == "TRUE"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0ltztpl" sourceRef="Event_17m5nnu" targetRef="Activity_1g33ys9" />
     <bpmn:sequenceFlow id="Flow_0dk32h3" sourceRef="Activity_0t3l45g" targetRef="Activity_072z7jg" />
     <bpmn:sequenceFlow id="Flow_052m8qy" name="Yes" sourceRef="Gateway_0sxrj9f" targetRef="Activity_0t3l45g">
@@ -66,7 +68,9 @@
     </bpmn:sequenceFlow>
     <bpmn:dataObjectReference id="Flow_16s64u8" name="Google Sheet IncomingOrder" dataObjectRef="Flow_0yxzjf1" />
     <bpmn:dataObject id="Flow_0yxzjf1" />
-    <bpmn:sequenceFlow id="Flow_0fkg53z" sourceRef="Gateway_1jescqe" targetRef="Gateway_1ygs5wf" />
+    <bpmn:sequenceFlow id="Flow_0fkg53z" sourceRef="Gateway_1jescqe" targetRef="Gateway_1ygs5wf">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${deliveryRequired == "FALSE"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0iqd01m" sourceRef="Activity_02qtoww" targetRef="Event_1j669dj" />
     <bpmn:sequenceFlow id="Flow_00lslar" sourceRef="Activity_18ct8kd" targetRef="Activity_1gwvtrw" />
     <bpmn:sequenceFlow id="Flow_1iiy2wx" sourceRef="Activity_0cprer8" targetRef="Gateway_1ygs5wf" />
@@ -483,21 +487,17 @@ Email=object.Email;</camunda:script>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1f2gw0v_di" bpmnElement="Flow_1f2gw0v">
         <di:waypoint x="268" y="730" />
-        <di:waypoint x="299" y="730" />
-        <di:waypoint x="299" y="733" />
-        <di:waypoint x="330" y="733" />
+        <di:waypoint x="330" y="730" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_19bdte3_di" bpmnElement="Flow_19bdte3">
-        <di:waypoint x="430" y="733" />
-        <di:waypoint x="455" y="733" />
-        <di:waypoint x="455" y="730" />
+        <di:waypoint x="430" y="730" />
         <di:waypoint x="480" y="730" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_0hiamzy_di" bpmnElement="MessageFlow_0hiamzy">
-        <di:waypoint x="360" y="693" />
+        <di:waypoint x="360" y="690" />
         <di:waypoint x="360" y="310" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="375" y="336" width="89" height="40" />
+          <dc:Bounds x="375" y="335" width="89" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_1ly0dvj_di" bpmnElement="MessageFlow_1ly0dvj">
@@ -518,7 +518,7 @@ Email=object.Email;</camunda:script>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0oys928_di" bpmnElement="Activity_1maw6zf">
-        <dc:Bounds x="330" y="693" width="100" height="80" />
+        <dc:Bounds x="330" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1qpxbk2_di" bpmnElement="StartEvent_1">
         <dc:Bounds x="232" y="712" width="36" height="36" />
@@ -591,7 +591,7 @@ Email=object.Email;</camunda:script>
       <bpmndi:BPMNEdge id="DataInputAssociation_03usv59_di" bpmnElement="DataInputAssociation_03usv59">
         <di:waypoint x="432" y="470" />
         <di:waypoint x="380" y="470" />
-        <di:waypoint x="380" y="693" />
+        <di:waypoint x="380" y="690" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_1g99gmz_di" bpmnElement="TextAnnotation_1g99gmz">
         <dc:Bounds x="2770" y="1180" width="100" height="96" />
