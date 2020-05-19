@@ -389,7 +389,7 @@ Email=object.Email;</camunda:script>
   </bpmn:process>
   <bpmn:process id="Process_0m0c358" isExecutable="false" />
   <bpmn:message id="Message_1yaw54s" name="Message_To_Re-Trigger_Token" />
-  <bpmn:message id="Message_18ajewz" name="Message_1lbe3dk" />
+  <bpmn:message id="Message_18ajewz" name="m_newOrder" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0xlz3h3">
       <bpmndi:BPMNShape id="Participant_0tejskr_di" bpmnElement="Participant_0tejskr" isHorizontal="true">
