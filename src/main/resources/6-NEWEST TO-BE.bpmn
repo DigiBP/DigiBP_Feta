@@ -8,6 +8,7 @@
     <bpmn:messageFlow id="MessageFlow_0hiamzy" name="Send confirmation that order will be processed" sourceRef="Activity_1maw6zf" targetRef="Participant_0ut6ein" />
     <bpmn:messageFlow id="MessageFlow_1ly0dvj" sourceRef="Participant_0ut6ein" targetRef="Activity_094f25q" />
     <bpmn:messageFlow id="MessageFlow_05aivd6" name="notify invalid order" sourceRef="Activity_1pw2xhu" targetRef="Participant_0ut6ein" />
+    <bpmn:messageFlow id="MessageFlow_0o5keg3" name="Trigger Message via Chatbot" sourceRef="Participant_0ut6ein" targetRef="Event_1belsq5" />
   </bpmn:collaboration>
   <bpmn:process id="Process_1d80vs3" isExecutable="true">
     <bpmn:laneSet id="LaneSet_07hnwxk">
@@ -26,7 +27,6 @@
         <bpmn:flowNodeRef>Activity_1maw6zf</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_02qv65s" name="Baker">
-        <bpmn:flowNodeRef>Event_0df25yl</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0arydmw</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1dz0dld" name="Shop Assistant">
@@ -53,8 +53,7 @@
     <bpmn:sequenceFlow id="Flow_1jcmoxm" name="Resolved" sourceRef="Gateway_1oky0sb" targetRef="Activity_0t3l45g">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${OrderStatus == "Resolved"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1mxijzj" sourceRef="Activity_072z7jg" targetRef="Event_0df25yl" />
-    <bpmn:sequenceFlow id="Flow_0ez1rr5" sourceRef="Event_0df25yl" targetRef="Activity_0arydmw" />
+    <bpmn:sequenceFlow id="Flow_1mxijzj" sourceRef="Activity_072z7jg" targetRef="Activity_0arydmw" />
     <bpmn:sequenceFlow id="Flow_1wjtc9m" sourceRef="Activity_1g33ys9" targetRef="Activity_0arydmw" />
     <bpmn:sequenceFlow id="Flow_1rdi42o" sourceRef="Activity_0arydmw" targetRef="Activity_1j5vs2u" />
     <bpmn:sequenceFlow id="Flow_03bx0fv" sourceRef="Activity_1j5vs2u" targetRef="Activity_0ew9ynt" />
@@ -77,7 +76,7 @@
     <bpmn:dataObject id="Flow_0v1z0o4" />
     <bpmn:startEvent id="StartEvent_1" name="Order Received">
       <bpmn:outgoing>Flow_1f2gw0v</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1dghq64" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1dghq64" messageRef="Message_18ajewz" />
     </bpmn:startEvent>
     <bpmn:businessRuleTask id="Activity_11smw1m" name="Validate Order" camunda:resultVariable="validationResult" camunda:decisionRef="Decision_orderValidation" camunda:mapDecisionResult="singleResult">
       <bpmn:extensionElements>
@@ -165,14 +164,9 @@
       <bpmn:outgoing>Flow_1jcmoxm</bpmn:outgoing>
       <bpmn:outgoing>Flow_03hyvyg</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:intermediateCatchEvent id="Event_0df25yl" name="Order Fulfillment Date t">
-      <bpmn:incoming>Flow_1mxijzj</bpmn:incoming>
-      <bpmn:outgoing>Flow_0ez1rr5</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_0lncd03" />
-    </bpmn:intermediateCatchEvent>
     <bpmn:userTask id="Activity_0arydmw" name="Bake/Prepare Order">
       <bpmn:incoming>Flow_1wjtc9m</bpmn:incoming>
-      <bpmn:incoming>Flow_0ez1rr5</bpmn:incoming>
+      <bpmn:incoming>Flow_1mxijzj</bpmn:incoming>
       <bpmn:outgoing>Flow_1rdi42o</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="Activity_1j5vs2u" name="Check Prepared Goods">
@@ -315,10 +309,10 @@ OrderStatus=object.OrderStatus;</camunda:script>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0oxyn8t" />
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_1etcymb" sourceRef="Event_1belsq5" targetRef="Activity_0g1vzfl" />
-    <bpmn:intermediateCatchEvent id="Event_1belsq5">
+    <bpmn:intermediateCatchEvent id="Event_1belsq5" name="Callback from Chatbot">
       <bpmn:incoming>Flow_1ihappa</bpmn:incoming>
       <bpmn:outgoing>Flow_1etcymb</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_010zylm" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_010zylm" messageRef="Message_1yaw54s" />
     </bpmn:intermediateCatchEvent>
     <bpmn:serviceTask id="Activity_1maw6zf" name="Get Order Details and send confirmation">
       <bpmn:extensionElements>
@@ -380,6 +374,8 @@ Email=object.Email;</camunda:script>
     <bpmn:association id="Association_01uu0h9" sourceRef="Activity_02qtoww" targetRef="TextAnnotation_1g99gmz" />
   </bpmn:process>
   <bpmn:process id="Process_0m0c358" isExecutable="false" />
+  <bpmn:message id="Message_1yaw54s" name="Message_To_Re-Trigger_Token" />
+  <bpmn:message id="Message_18ajewz" name="Message_1lbe3dk" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0xlz3h3">
       <bpmndi:BPMNShape id="Participant_0tejskr_di" bpmnElement="Participant_0tejskr" isHorizontal="true">
@@ -433,18 +429,9 @@ Email=object.Email;</camunda:script>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1mxijzj_di" bpmnElement="Flow_1mxijzj">
         <di:waypoint x="1340" y="770" />
-        <di:waypoint x="1340" y="892" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ez1rr5_di" bpmnElement="Flow_0ez1rr5">
-        <di:waypoint x="1358" y="910" />
+        <di:waypoint x="1340" y="910" />
         <di:waypoint x="1510" y="910" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_1a7eudx_di" bpmnElement="Event_0df25yl">
-        <dc:Bounds x="1322" y="892" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1300" y="935" width="83" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1rdi42o_di" bpmnElement="Flow_1rdi42o">
         <di:waypoint x="1560" y="960" />
         <di:waypoint x="1560" y="1113" />
@@ -701,7 +688,17 @@ Email=object.Email;</camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1lyqkgj_di" bpmnElement="Event_1belsq5">
         <dc:Bounds x="842" y="532" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="826" y="575" width="68" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MessageFlow_0o5keg3_di" bpmnElement="MessageFlow_0o5keg3">
+        <di:waypoint x="860" y="310" />
+        <di:waypoint x="860" y="532" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="879" y="336" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
