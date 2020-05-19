@@ -73,6 +73,31 @@ for(i=0; i &lt; object.ingredients.length; i++){
     <bpmn:sequenceFlow id="Flow_1nqzds2" sourceRef="Event_0aoh001" targetRef="Activity_1jzr0f8" />
     <bpmn:dataStoreReference id="Flow_19yz5dm" name="Stock DB (Integromat Data Store)" />
     <bpmn:serviceTask id="Activity_1420gd0" name="Reserve Ingredients in Stock">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">https://hook.integromat.com/lr94vq8piubfplvxqwv3h6o3akktfan1</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
+
+    "HamQuantitiy":HamQuantity,
+    "ButterQuantity":ButterQuantity,
+    "SaltQuantity":SaltQuantity,
+    "SugarQuantity":SugarQuantity,
+    "FlowerQuantity":FlowerQuantity
+   
+});</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1mowbgr</bpmn:incoming>
       <bpmn:outgoing>Flow_0ojn8ns</bpmn:outgoing>
       <bpmn:property id="Property_1vmyfzt" name="__targetRef_placeholder" />
