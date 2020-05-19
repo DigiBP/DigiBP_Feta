@@ -194,8 +194,8 @@
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
-            <camunda:inputParameter name="method:Text">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url:Text">https://hook.integromat.com/2qrw45svqzq8vvdfmmjxyx69m0y1e4wf</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/2qrw45svqzq8vvdfmmjxyx69m0y1e4wf</camunda:inputParameter>
             <camunda:outputParameter name="SandwichQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 SandwichQuantity=object.SandwichQuantity;</camunda:script>
@@ -320,6 +320,16 @@ OrderStatus=object.OrderStatus;</camunda:script>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/qgd78sk4chu6scdpsz8gatwz3ebjlu9c</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
+    "orderId":"10001001"
+});</camunda:script>
+            </camunda:inputParameter>
             <camunda:outputParameter name="SandwichQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 SandwichQuantity=object.SandwichQuantity;</camunda:script>
@@ -368,10 +378,10 @@ Email=object.Email;</camunda:script>
         <bpmn:targetRef>Property_16nrs24</bpmn:targetRef>
       </bpmn:dataInputAssociation>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_072z7jg" name="Reserve needed Stocks">
+    <bpmn:callActivity id="Activity_072z7jg" name="Reserve needed Stocks" calledElement="Process_03w03b4">
       <bpmn:incoming>Flow_0dk32h3</bpmn:incoming>
       <bpmn:outgoing>Flow_1mxijzj</bpmn:outgoing>
-    </bpmn:userTask>
+    </bpmn:callActivity>
     <bpmn:textAnnotation id="TextAnnotation_1g99gmz">
       <bpmn:text>*Can be changed to script (mark order as completed in the DB*</bpmn:text>
     </bpmn:textAnnotation>
@@ -696,7 +706,7 @@ Email=object.Email;</camunda:script>
           <dc:Bounds x="879" y="336" width="82" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_1iugzn9_di" bpmnElement="Activity_072z7jg">
+      <bpmndi:BPMNShape id="Activity_0wi087l_di" bpmnElement="Activity_072z7jg">
         <dc:Bounds x="1290" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
