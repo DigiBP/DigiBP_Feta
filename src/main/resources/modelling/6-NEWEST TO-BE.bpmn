@@ -312,7 +312,7 @@ OrderStatus=object.OrderStatus;</camunda:script>
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
-            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/qgd78sk4chu6scdpsz8gatwz3ebjlu9c</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
