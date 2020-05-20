@@ -25,7 +25,6 @@
         <bpmn:flowNodeRef>Event_1belsq5</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>t_getOrderDetailsSendConfirmation</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>t_reserveStock</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_14cnmx7</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_02qv65s" name="Baker">
         <bpmn:flowNodeRef>Activity_0arydmw</bpmn:flowNodeRef>
@@ -63,7 +62,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${deliveryRequired == "TRUE"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0ltztpl" sourceRef="Event_17m5nnu" targetRef="Activity_1g33ys9" />
-    <bpmn:sequenceFlow id="Flow_0dk32h3" sourceRef="t_addOrderToDB" targetRef="Activity_14cnmx7" />
+    <bpmn:sequenceFlow id="Flow_0dk32h3" sourceRef="t_addOrderToDB" targetRef="t_reserveStock" />
     <bpmn:sequenceFlow id="Flow_052m8qy" name="Yes" sourceRef="Gateway_0sxrj9f" targetRef="t_addOrderToDB">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valid == "TRUE"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -348,19 +347,9 @@ email=object.email;</camunda:script>
       </bpmn:dataInputAssociation>
     </bpmn:serviceTask>
     <bpmn:callActivity id="t_reserveStock" name="Reserve needed Stocks" calledElement="sp_reserveStock">
-      <bpmn:incoming>Flow_11t1h8q</bpmn:incoming>
+      <bpmn:incoming>Flow_0dk32h3</bpmn:incoming>
       <bpmn:outgoing>Flow_1mxijzj</bpmn:outgoing>
     </bpmn:callActivity>
-    <bpmn:sequenceFlow id="Flow_11t1h8q" sourceRef="Activity_14cnmx7" targetRef="t_reserveStock" />
-    <bpmn:userTask id="Activity_14cnmx7" name="confirm">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="orderId_DB" label="orderId_DB" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0dk32h3</bpmn:incoming>
-      <bpmn:outgoing>Flow_11t1h8q</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:textAnnotation id="TextAnnotation_1g99gmz">
       <bpmn:text>*Can be changed to script (mark order as completed in the DB*</bpmn:text>
     </bpmn:textAnnotation>
@@ -421,8 +410,8 @@ email=object.email;</camunda:script>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1mxijzj_di" bpmnElement="Flow_1mxijzj">
-        <di:waypoint x="1510" y="770" />
-        <di:waypoint x="1510" y="825" />
+        <di:waypoint x="1430" y="770" />
+        <di:waypoint x="1430" y="825" />
         <di:waypoint x="1560" y="825" />
         <di:waypoint x="1560" y="880" />
       </bpmndi:BPMNEdge>
@@ -552,7 +541,7 @@ email=object.email;</camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0dk32h3_di" bpmnElement="Flow_0dk32h3">
         <di:waypoint x="1240" y="730" />
-        <di:waypoint x="1290" y="730" />
+        <di:waypoint x="1380" y="730" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_052m8qy_di" bpmnElement="Flow_052m8qy">
         <di:waypoint x="685" y="730" />
@@ -687,14 +676,7 @@ email=object.email;</camunda:script>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_0wi087l_di" bpmnElement="t_reserveStock">
-        <dc:Bounds x="1460" y="690" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_11t1h8q_di" bpmnElement="Flow_11t1h8q">
-        <di:waypoint x="1390" y="730" />
-        <di:waypoint x="1460" y="730" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_0n3zwrx_di" bpmnElement="Activity_14cnmx7">
-        <dc:Bounds x="1290" y="690" width="100" height="80" />
+        <dc:Bounds x="1380" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
