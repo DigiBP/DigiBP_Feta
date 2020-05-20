@@ -3,9 +3,9 @@
   <bpmn:collaboration id="Collaboration_0xlz3h3">
     <bpmn:participant id="Participant_0tejskr" name="Main Process" processRef="Process_1d80vs3" />
     <bpmn:participant id="Participant_0ut6ein" name="Customer" processRef="Process_0m0c358" />
-    <bpmn:messageFlow id="MessageFlow_1p3vgxd" name="Send&#10;Web-Form" sourceRef="Participant_0ut6ein" targetRef="StartEvent_1" />
+    <bpmn:messageFlow id="MessageFlow_1p3vgxd" name="Send&#10;Web-Form" sourceRef="Participant_0ut6ein" targetRef="se_newOrder" />
     <bpmn:messageFlow id="MessageFlow_07u8thq" sourceRef="Activity_094f25q" targetRef="Participant_0ut6ein" />
-    <bpmn:messageFlow id="MessageFlow_0hiamzy" name="Send confirmation that order will be processed" sourceRef="Activity_1maw6zf" targetRef="Participant_0ut6ein" />
+    <bpmn:messageFlow id="MessageFlow_0hiamzy" name="Send confirmation that order will be processed" sourceRef="t_GetOrderDetailsSendConfirmation" targetRef="Participant_0ut6ein" />
     <bpmn:messageFlow id="MessageFlow_1ly0dvj" sourceRef="Participant_0ut6ein" targetRef="Activity_094f25q" />
     <bpmn:messageFlow id="MessageFlow_05aivd6" name="notify invalid order" sourceRef="Activity_1pw2xhu" targetRef="Participant_0ut6ein" />
     <bpmn:messageFlow id="MessageFlow_0o5keg3" name="Trigger Message via Chatbot" sourceRef="Participant_0ut6ein" targetRef="Event_1belsq5" />
@@ -13,8 +13,8 @@
   <bpmn:process id="Process_1d80vs3" isExecutable="true">
     <bpmn:laneSet id="LaneSet_07hnwxk">
       <bpmn:lane id="Lane_1inxogt" name="Workflow Engine">
-        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_11smw1m</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>se_newOrder</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_orderValidation</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0sxrj9f</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1pw2xhu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_094f25q</bpmn:flowNodeRef>
@@ -23,7 +23,7 @@
         <bpmn:flowNodeRef>Activity_0t3l45g</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0g1vzfl</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1belsq5</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1maw6zf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_GetOrderDetailsSendConfirmation</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_072z7jg</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_02qv65s" name="Baker">
@@ -43,13 +43,13 @@
         <bpmn:flowNodeRef>Event_17m5nnu</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:sequenceFlow id="Flow_1f2gw0v" sourceRef="StartEvent_1" targetRef="Activity_1maw6zf" />
-    <bpmn:sequenceFlow id="Flow_19bdte3" sourceRef="Activity_1maw6zf" targetRef="Activity_11smw1m" />
+    <bpmn:sequenceFlow id="Flow_1f2gw0v" sourceRef="se_newOrder" targetRef="t_GetOrderDetailsSendConfirmation" />
+    <bpmn:sequenceFlow id="Flow_19bdte3" sourceRef="t_GetOrderDetailsSendConfirmation" targetRef="t_orderValidation" />
     <bpmn:sequenceFlow id="Flow_03865ia" name="No" sourceRef="Gateway_0sxrj9f" targetRef="Activity_1pw2xhu">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valid == "FALSE"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ihappa" sourceRef="Activity_094f25q" targetRef="Event_1belsq5" />
-    <bpmn:sequenceFlow id="Flow_0axulgo" sourceRef="Activity_11smw1m" targetRef="Gateway_0sxrj9f" />
+    <bpmn:sequenceFlow id="Flow_0axulgo" sourceRef="t_orderValidation" targetRef="Gateway_0sxrj9f" />
     <bpmn:sequenceFlow id="Flow_1jcmoxm" name="Resolved" sourceRef="Gateway_1oky0sb" targetRef="Activity_0t3l45g">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${OrderStatus == "Resolved"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -78,11 +78,11 @@
     <bpmn:sequenceFlow id="Flow_0ly0748" sourceRef="Activity_1gwvtrw" targetRef="Activity_02qtoww" />
     <bpmn:dataObjectReference id="Flow_0wjiua6" name="Google-Sheet Orders with Issues List" dataObjectRef="Flow_0v1z0o4" />
     <bpmn:dataObject id="Flow_0v1z0o4" />
-    <bpmn:startEvent id="StartEvent_1" name="Order Received">
+    <bpmn:startEvent id="se_newOrder" name="Order Received">
       <bpmn:outgoing>Flow_1f2gw0v</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1dghq64" messageRef="Message_18ajewz" />
     </bpmn:startEvent>
-    <bpmn:businessRuleTask id="Activity_11smw1m" name="Validate Order" camunda:resultVariable="validationResult" camunda:decisionRef="Decision_orderValidation" camunda:mapDecisionResult="singleResult">
+    <bpmn:businessRuleTask id="t_orderValidation" name="Validate Order" camunda:resultVariable="validationResult" camunda:decisionRef="Decision_orderValidation" camunda:mapDecisionResult="singleResult">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="SandwichQuantity">
@@ -114,7 +114,7 @@
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
 
-    "OrderID":"660",
+    "OrderID":orderId,
 "name":name,
     "IssueReason":explanation
    
@@ -308,7 +308,7 @@ OrderStatus=object.OrderStatus;</camunda:script>
       <bpmn:outgoing>Flow_1etcymb</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_010zylm" messageRef="Message_1yaw54s" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:serviceTask id="Activity_1maw6zf" name="Get Order Details and send confirmation">
+    <bpmn:serviceTask id="t_GetOrderDetailsSendConfirmation" name="Get Order Details and send confirmation">
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -321,7 +321,7 @@ OrderStatus=object.OrderStatus;</camunda:script>
             </camunda:inputParameter>
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
-    "orderId":"660"
+    "orderId":orderId
 });</camunda:script>
             </camunda:inputParameter>
             <camunda:outputParameter name="SandwichQuantity">
@@ -382,7 +382,7 @@ Email=object.Email;</camunda:script>
     <bpmn:association id="Association_01uu0h9" sourceRef="Activity_02qtoww" targetRef="TextAnnotation_1g99gmz" />
   </bpmn:process>
   <bpmn:process id="Process_0m0c358" isExecutable="false" />
-  <bpmn:message id="Message_1yaw54s" name="Message_To_Re-Trigger_Token" />
+  <bpmn:message id="Message_1yaw54s" name="m_chatbotCallback" />
   <bpmn:message id="Message_18ajewz" name="m_newOrder" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0xlz3h3">
@@ -474,7 +474,7 @@ Email=object.Email;</camunda:script>
         <di:waypoint x="1810" y="1153" />
         <di:waypoint x="1865" y="1153" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_1qp0itz_di" bpmnElement="Activity_11smw1m">
+      <bpmndi:BPMNShape id="Activity_1qp0itz_di" bpmnElement="t_orderValidation">
         <dc:Bounds x="480" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0lznv4y_di" bpmnElement="Activity_0ew9ynt">
@@ -521,10 +521,10 @@ Email=object.Email;</camunda:script>
           <dc:Bounds x="1050" y="488" width="79" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0oys928_di" bpmnElement="Activity_1maw6zf">
+      <bpmndi:BPMNShape id="Activity_0oys928_di" bpmnElement="t_GetOrderDetailsSendConfirmation">
         <dc:Bounds x="330" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1qpxbk2_di" bpmnElement="StartEvent_1">
+      <bpmndi:BPMNShape id="Event_1qpxbk2_di" bpmnElement="se_newOrder">
         <dc:Bounds x="232" y="712" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="221" y="755" width="78" height="14" />
