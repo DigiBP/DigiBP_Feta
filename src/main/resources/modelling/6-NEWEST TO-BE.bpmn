@@ -162,7 +162,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="Activity_0arydmw" name="Bake/Prepare Order" camunda:assignee="baker">
       <bpmn:incoming>Flow_1wjtc9m</bpmn:incoming>
-      <bpmn:incoming>Flow_09klba8</bpmn:incoming>
+      <bpmn:incoming>Flow_0nybwio</bpmn:incoming>
       <bpmn:outgoing>Flow_1rdi42o</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="Activity_1j5vs2u" name="Check Prepared Goods">
@@ -208,7 +208,7 @@ name=object.orderId_DB;</camunda:script>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1jcmoxm</bpmn:incoming>
       <bpmn:incoming>Flow_052m8qy</bpmn:incoming>
-      <bpmn:outgoing>Flow_1wtg81e</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1hj99v7</bpmn:outgoing>
       <bpmn:property id="Property_0kjvm1i" name="__targetRef_placeholder" />
       <bpmn:dataInputAssociation id="DataInputAssociation_1ixt4ns">
         <bpmn:sourceRef>Flow_16s64u8</bpmn:sourceRef>
@@ -345,8 +345,8 @@ email=object.email;</camunda:script>
       </bpmn:dataInputAssociation>
     </bpmn:serviceTask>
     <bpmn:subProcess id="t_reserveStock" name="Reserve needed Stocks">
-      <bpmn:incoming>Flow_1wtg81e</bpmn:incoming>
-      <bpmn:outgoing>Flow_09klba8</bpmn:outgoing>
+      <bpmn:incoming>Flow_1hj99v7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nybwio</bpmn:outgoing>
       <bpmn:sequenceFlow id="Flow_06eogf0" sourceRef="Activity_0v2cyeo" targetRef="Activity_0ul69i2" />
       <bpmn:sequenceFlow id="Flow_02nu3hf" sourceRef="Activity_0ul69i2" targetRef="Event_1kqf0mi" />
       <bpmn:endEvent id="Event_1kqf0mi">
@@ -399,7 +399,7 @@ email=object.email;</camunda:script>
           <camunda:connector>
             <camunda:inputOutput>
               <camunda:inputParameter name="method">POST</camunda:inputParameter>
-              <camunda:inputParameter name="URL">https://hook.integromat.com/jameoa9e5i5f25clmqzeptu8b51ffw1y</camunda:inputParameter>
+              <camunda:inputParameter name="url">https://hook.integromat.com/4u9t39putyawgy1ghi4utxpgvtb8aywe</camunda:inputParameter>
               <camunda:inputParameter name="payload">
                 <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
     "orderId":orderId_DB
@@ -458,8 +458,8 @@ for(i=0; i &lt; object.ingredients.length; i++){
       <bpmn:sequenceFlow id="Flow_1sq2y4w" sourceRef="Event_1ok6h6m" targetRef="Activity_0v2cyeo" />
       <bpmn:dataStoreReference id="Flow_0fsam95" name="Stock DB (Integromat Data Store)" />
     </bpmn:subProcess>
-    <bpmn:sequenceFlow id="Flow_1wtg81e" sourceRef="t_addOrderToDB" targetRef="t_reserveStock" />
-    <bpmn:sequenceFlow id="Flow_09klba8" sourceRef="t_reserveStock" targetRef="Activity_0arydmw" />
+    <bpmn:sequenceFlow id="Flow_1hj99v7" sourceRef="t_addOrderToDB" targetRef="t_reserveStock" />
+    <bpmn:sequenceFlow id="Flow_0nybwio" sourceRef="t_reserveStock" targetRef="Activity_0arydmw" />
     <bpmn:textAnnotation id="TextAnnotation_1g99gmz">
       <bpmn:text>*Can be changed to script (mark order as completed in the DB*</bpmn:text>
     </bpmn:textAnnotation>
@@ -776,13 +776,13 @@ for(i=0; i &lt; object.ingredients.length; i++){
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1ok6h6m_di" bpmnElement="Event_1ok6h6m">
-        <dc:Bounds x="1442" y="812" width="36" height="36" />
+        <dc:Bounds x="1442" y="832" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0v2cyeo_di" bpmnElement="Activity_0v2cyeo">
-        <dc:Bounds x="1533" y="790" width="100" height="80" />
+        <dc:Bounds x="1533" y="810" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ul69i2_di" bpmnElement="Activity_0ul69i2">
-        <dc:Bounds x="1680" y="790" width="100" height="80" />
+        <dc:Bounds x="1680" y="810" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Flow_0bghoyg_di" bpmnElement="Flow_0bghoyg">
         <dc:Bounds x="1638" y="598" width="50" height="50" />
@@ -791,30 +791,30 @@ for(i=0; i &lt; object.ingredients.length; i++){
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1kqf0mi_di" bpmnElement="Event_1kqf0mi">
-        <dc:Bounds x="1812" y="812" width="36" height="36" />
+        <dc:Bounds x="1812" y="832" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_06eogf0_di" bpmnElement="Flow_06eogf0">
-        <di:waypoint x="1633" y="830" />
-        <di:waypoint x="1680" y="830" />
+        <di:waypoint x="1633" y="850" />
+        <di:waypoint x="1680" y="850" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataInputAssociation_0jq6ocz_di" bpmnElement="DataInputAssociation_0jq6ocz">
-        <di:waypoint x="1681" y="648" />
-        <di:waypoint x="1726" y="790" />
+        <di:waypoint x="1680" y="648" />
+        <di:waypoint x="1727" y="810" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1mf0f8d_di" bpmnElement="DataOutputAssociation_1mf0f8d">
-        <di:waypoint x="1706" y="790" />
-        <di:waypoint x="1661" y="648" />
+        <di:waypoint x="1707" y="810" />
+        <di:waypoint x="1660" y="648" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_02nu3hf_di" bpmnElement="Flow_02nu3hf">
-        <di:waypoint x="1780" y="830" />
-        <di:waypoint x="1812" y="830" />
+        <di:waypoint x="1780" y="850" />
+        <di:waypoint x="1812" y="850" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_0lf9p9u_di" bpmnElement="t_reserveStock" isExpanded="false">
-        <dc:Bounds x="1380" y="690" width="100" height="80" />
+        <dc:Bounds x="1360" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1sq2y4w_di" bpmnElement="Flow_1sq2y4w">
-        <di:waypoint x="1478" y="830" />
-        <di:waypoint x="1533" y="830" />
+        <di:waypoint x="1478" y="850" />
+        <di:waypoint x="1533" y="850" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Flow_0fsam95_di" bpmnElement="Flow_0fsam95">
         <dc:Bounds x="1723" y="628" width="50" height="50" />
@@ -823,18 +823,18 @@ for(i=0; i &lt; object.ingredients.length; i++){
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataOutputAssociation_06nvu9y_di" bpmnElement="DataOutputAssociation_06nvu9y">
-        <di:waypoint x="1733" y="790" />
-        <di:waypoint x="1745" y="678" />
+        <di:waypoint x="1733" y="810" />
+        <di:waypoint x="1746" y="678" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1wtg81e_di" bpmnElement="Flow_1wtg81e">
+      <bpmndi:BPMNEdge id="Flow_1hj99v7_di" bpmnElement="Flow_1hj99v7">
         <di:waypoint x="1240" y="730" />
-        <di:waypoint x="1380" y="730" />
+        <di:waypoint x="1360" y="730" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_09klba8_di" bpmnElement="Flow_09klba8">
-        <di:waypoint x="1480" y="730" />
-        <di:waypoint x="1495" y="730" />
-        <di:waypoint x="1495" y="900" />
-        <di:waypoint x="1510" y="900" />
+      <bpmndi:BPMNEdge id="Flow_0nybwio_di" bpmnElement="Flow_0nybwio">
+        <di:waypoint x="1460" y="730" />
+        <di:waypoint x="1485" y="730" />
+        <di:waypoint x="1485" y="920" />
+        <di:waypoint x="1510" y="920" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
