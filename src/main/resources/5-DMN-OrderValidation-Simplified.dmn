@@ -5,17 +5,17 @@
       <biodi:bounds x="150" y="150" width="180" height="80" />
     </extensionElements>
     <decisionTable id="decisionTable_1" hitPolicy="FIRST">
-      <input id="InputClause_1aj2riu" label="Sandwich quantity" camunda:inputVariable="SandwichQuantity">
+      <input id="InputClause_1aj2riu" label="Sandwich quantity" camunda:inputVariable="sandwichQuantity">
         <inputExpression id="LiteralExpression_09j224e" typeRef="integer" expressionLanguage="JavaScript">
           <text></text>
         </inputExpression>
       </input>
-      <input id="InputClause_06hkofe" label="Croissant quantity" camunda:inputVariable="CroissantQuantity">
+      <input id="InputClause_06hkofe" label="Croissant quantity" camunda:inputVariable="croissantQuantity">
         <inputExpression id="LiteralExpression_0jwal3n" typeRef="integer">
           <text></text>
         </inputExpression>
       </input>
-      <input id="InputClause_1j64dhc" label="Pastery quantity" camunda:inputVariable="PasteryQuantity">
+      <input id="InputClause_1j64dhc" label="Pastry quantity" camunda:inputVariable="pastryQuantity">
         <inputExpression id="LiteralExpression_1yah6zo" typeRef="integer">
           <text></text>
         </inputExpression>
