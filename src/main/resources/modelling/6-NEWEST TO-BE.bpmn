@@ -94,12 +94,6 @@
           <camunda:inputParameter name="PasteryQuantity">
             <camunda:script scriptFormat="JavaScript">Number(PasteryQuantity)</camunda:script>
           </camunda:inputParameter>
-          <camunda:inputParameter name="TotalQuantity">
-            <camunda:script scriptFormat="JavaScript">Number(TotalQuantity)</camunda:script>
-          </camunda:inputParameter>
-          <camunda:inputParameter name="FulfilmentDate">
-            <camunda:script scriptFormat="JavaScript">Number(FulfilmentDate)</camunda:script>
-          </camunda:inputParameter>
           <camunda:outputParameter name="valid">${validationResult.valid}</camunda:outputParameter>
           <camunda:outputParameter name="explanation">${validationResult.explanation}</camunda:outputParameter>
         </camunda:inputOutput>
@@ -327,7 +321,7 @@ OrderStatus=object.OrderStatus;</camunda:script>
             </camunda:inputParameter>
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
-    "orderId":"10001001"
+    "orderId":orderId
 });</camunda:script>
             </camunda:inputParameter>
             <camunda:outputParameter name="SandwichQuantity">
