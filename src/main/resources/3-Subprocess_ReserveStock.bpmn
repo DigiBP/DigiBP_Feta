@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0yyvm4d" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
   <bpmn:collaboration id="Collaboration_0mrvuty">
-    <bpmn:participant id="Participant_1r74pk4" name="Reserve Needed Stock" processRef="Process_03w03b4" />
+    <bpmn:participant id="Participant_1r74pk4" name="Reserve Needed Stock" processRef="sp_reserveStock" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_03w03b4" isExecutable="true">
+  <bpmn:process id="sp_reserveStock" isExecutable="true">
     <bpmn:startEvent id="Event_0aoh001">
       <bpmn:outgoing>Flow_1nqzds2</bpmn:outgoing>
     </bpmn:startEvent>
@@ -16,7 +16,7 @@
             <camunda:inputParameter name="URL">https://hook.integromat.com/jameoa9e5i5f25clmqzeptu8b51ffw1y</camunda:inputParameter>
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
-    "orderId":"eafa7ec4ea16"
+    "orderId":orderId_DB
 });</camunda:script>
             </camunda:inputParameter>
             <camunda:inputParameter name="headers">

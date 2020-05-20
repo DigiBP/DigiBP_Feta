@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0cxzstj" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
   <bpmn:collaboration id="Collaboration_0xlz3h3">
-    <bpmn:participant id="Participant_0tejskr" name="Main Process" processRef="Process_1d80vs3" />
+    <bpmn:participant id="Participant_0tejskr" name="Main Process" processRef="p_mainProcess" />
     <bpmn:participant id="Participant_0ut6ein" name="Customer" processRef="Process_0m0c358" />
     <bpmn:messageFlow id="MessageFlow_1p3vgxd" name="Send&#10;Web-Form" sourceRef="Participant_0ut6ein" targetRef="se_newOrder" />
     <bpmn:messageFlow id="MessageFlow_07u8thq" sourceRef="Activity_094f25q" targetRef="Participant_0ut6ein" />
-    <bpmn:messageFlow id="MessageFlow_0hiamzy" name="Send confirmation that order will be processed" sourceRef="t_GetOrderDetailsSendConfirmation" targetRef="Participant_0ut6ein" />
+    <bpmn:messageFlow id="MessageFlow_0hiamzy" name="Send confirmation that order will be processed" sourceRef="t_getOrderDetailsSendConfirmation" targetRef="Participant_0ut6ein" />
     <bpmn:messageFlow id="MessageFlow_1ly0dvj" sourceRef="Participant_0ut6ein" targetRef="Activity_094f25q" />
     <bpmn:messageFlow id="MessageFlow_05aivd6" name="notify invalid order" sourceRef="Activity_1pw2xhu" targetRef="Participant_0ut6ein" />
     <bpmn:messageFlow id="MessageFlow_0o5keg3" name="Trigger Message via Chatbot" sourceRef="Participant_0ut6ein" targetRef="Event_1belsq5" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1d80vs3" isExecutable="true">
+  <bpmn:process id="p_mainProcess" isExecutable="true">
     <bpmn:laneSet id="LaneSet_07hnwxk">
       <bpmn:lane id="Lane_1inxogt" name="Workflow Engine">
         <bpmn:flowNodeRef>se_newOrder</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>t_order</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_orderValidation</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0sxrj9f</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1pw2xhu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_094f25q</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1s11869</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_1oky0sb</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0t3l45g</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_addOrderToDB</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0g1vzfl</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1belsq5</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>t_GetOrderDetailsSendConfirmation</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_072z7jg</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_getOrderDetailsSendConfirmation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_reserveStock</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_14cnmx7</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_02qv65s" name="Baker">
         <bpmn:flowNodeRef>Activity_0arydmw</bpmn:flowNodeRef>
@@ -43,17 +44,17 @@
         <bpmn:flowNodeRef>Event_17m5nnu</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:sequenceFlow id="Flow_1f2gw0v" sourceRef="se_newOrder" targetRef="t_GetOrderDetailsSendConfirmation" />
-    <bpmn:sequenceFlow id="Flow_19bdte3" sourceRef="t_GetOrderDetailsSendConfirmation" targetRef="t_order" />
+    <bpmn:sequenceFlow id="Flow_1f2gw0v" sourceRef="se_newOrder" targetRef="t_getOrderDetailsSendConfirmation" />
+    <bpmn:sequenceFlow id="Flow_19bdte3" sourceRef="t_getOrderDetailsSendConfirmation" targetRef="t_orderValidation" />
     <bpmn:sequenceFlow id="Flow_03865ia" name="No" sourceRef="Gateway_0sxrj9f" targetRef="Activity_1pw2xhu">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valid == "FALSE"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ihappa" sourceRef="Activity_094f25q" targetRef="Event_1belsq5" />
-    <bpmn:sequenceFlow id="Flow_0axulgo" sourceRef="t_order" targetRef="Gateway_0sxrj9f" />
-    <bpmn:sequenceFlow id="Flow_1jcmoxm" name="Resolved" sourceRef="Gateway_1oky0sb" targetRef="Activity_0t3l45g">
+    <bpmn:sequenceFlow id="Flow_0axulgo" sourceRef="t_orderValidation" targetRef="Gateway_0sxrj9f" />
+    <bpmn:sequenceFlow id="Flow_1jcmoxm" name="Resolved" sourceRef="Gateway_1oky0sb" targetRef="t_addOrderToDB">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${OrderStatus == "Resolved"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1mxijzj" sourceRef="Activity_072z7jg" targetRef="Activity_0arydmw" />
+    <bpmn:sequenceFlow id="Flow_1mxijzj" sourceRef="t_reserveStock" targetRef="Activity_0arydmw" />
     <bpmn:sequenceFlow id="Flow_1wjtc9m" sourceRef="Activity_1g33ys9" targetRef="Activity_0arydmw" />
     <bpmn:sequenceFlow id="Flow_1rdi42o" sourceRef="Activity_0arydmw" targetRef="Activity_1j5vs2u" />
     <bpmn:sequenceFlow id="Flow_03bx0fv" sourceRef="Activity_1j5vs2u" targetRef="Activity_0ew9ynt" />
@@ -62,8 +63,8 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${deliveryRequired == "TRUE"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0ltztpl" sourceRef="Event_17m5nnu" targetRef="Activity_1g33ys9" />
-    <bpmn:sequenceFlow id="Flow_0dk32h3" sourceRef="Activity_0t3l45g" targetRef="Activity_072z7jg" />
-    <bpmn:sequenceFlow id="Flow_052m8qy" name="Yes" sourceRef="Gateway_0sxrj9f" targetRef="Activity_0t3l45g">
+    <bpmn:sequenceFlow id="Flow_0dk32h3" sourceRef="t_addOrderToDB" targetRef="Activity_14cnmx7" />
+    <bpmn:sequenceFlow id="Flow_052m8qy" name="Yes" sourceRef="Gateway_0sxrj9f" targetRef="t_addOrderToDB">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valid == "TRUE"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:dataObjectReference id="Flow_16s64u8" name="Google Sheet IncomingOrder" dataObjectRef="Flow_0yxzjf1" />
@@ -82,7 +83,7 @@
       <bpmn:outgoing>Flow_1f2gw0v</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1dghq64" messageRef="Message_18ajewz" />
     </bpmn:startEvent>
-    <bpmn:businessRuleTask id="t_order" name="Validate Order" camunda:resultVariable="validationResult" camunda:decisionRef="Decision_orderValidation" camunda:mapDecisionResult="singleResult">
+    <bpmn:businessRuleTask id="t_orderValidation" name="Validate Order" camunda:resultVariable="validationResult" camunda:decisionRef="Decision_orderValidation" camunda:mapDecisionResult="singleResult">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="sandwichQuantity">
@@ -184,7 +185,7 @@
       <bpmn:incoming>Flow_0ltztpl</bpmn:incoming>
       <bpmn:outgoing>Flow_1wjtc9m</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_0t3l45g" name="Add Order to Database">
+    <bpmn:serviceTask id="t_addOrderToDB" name="Add Order to Database">
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -285,7 +286,7 @@ OrderStatus=object.OrderStatus;</camunda:script>
       <bpmn:outgoing>Flow_1etcymb</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_010zylm" messageRef="Message_1yaw54s" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:serviceTask id="t_GetOrderDetailsSendConfirmation" name="Get Order Details and send confirmation">
+    <bpmn:serviceTask id="t_getOrderDetailsSendConfirmation" name="Get Order Details and send confirmation">
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -345,10 +346,20 @@ email=object.email;</camunda:script>
         <bpmn:targetRef>Property_16nrs24</bpmn:targetRef>
       </bpmn:dataInputAssociation>
     </bpmn:serviceTask>
-    <bpmn:callActivity id="Activity_072z7jg" name="Reserve needed Stocks" calledElement="Process_03w03b4">
-      <bpmn:incoming>Flow_0dk32h3</bpmn:incoming>
+    <bpmn:callActivity id="t_reserveStock" name="Reserve needed Stocks" calledElement="sp_reserveStock">
+      <bpmn:incoming>Flow_11t1h8q</bpmn:incoming>
       <bpmn:outgoing>Flow_1mxijzj</bpmn:outgoing>
     </bpmn:callActivity>
+    <bpmn:sequenceFlow id="Flow_11t1h8q" sourceRef="Activity_14cnmx7" targetRef="t_reserveStock" />
+    <bpmn:userTask id="Activity_14cnmx7" name="confirm">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="orderId_DB" label="orderId_DB" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0dk32h3</bpmn:incoming>
+      <bpmn:outgoing>Flow_11t1h8q</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:textAnnotation id="TextAnnotation_1g99gmz">
       <bpmn:text>*Can be changed to script (mark order as completed in the DB*</bpmn:text>
     </bpmn:textAnnotation>
@@ -409,9 +420,10 @@ email=object.email;</camunda:script>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1mxijzj_di" bpmnElement="Flow_1mxijzj">
-        <di:waypoint x="1340" y="770" />
-        <di:waypoint x="1340" y="910" />
-        <di:waypoint x="1510" y="910" />
+        <di:waypoint x="1510" y="770" />
+        <di:waypoint x="1510" y="825" />
+        <di:waypoint x="1560" y="825" />
+        <di:waypoint x="1560" y="880" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1rdi42o_di" bpmnElement="Flow_1rdi42o">
         <di:waypoint x="1560" y="960" />
@@ -447,7 +459,7 @@ email=object.email;</camunda:script>
         <di:waypoint x="1810" y="1153" />
         <di:waypoint x="1865" y="1153" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_1qp0itz_di" bpmnElement="t_order">
+      <bpmndi:BPMNShape id="Activity_1qp0itz_di" bpmnElement="t_orderValidation">
         <dc:Bounds x="480" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0lznv4y_di" bpmnElement="Activity_0ew9ynt">
@@ -494,7 +506,7 @@ email=object.email;</camunda:script>
           <dc:Bounds x="1050" y="488" width="79" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0oys928_di" bpmnElement="t_GetOrderDetailsSendConfirmation">
+      <bpmndi:BPMNShape id="Activity_0oys928_di" bpmnElement="t_getOrderDetailsSendConfirmation">
         <dc:Bounds x="330" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1qpxbk2_di" bpmnElement="se_newOrder">
@@ -548,7 +560,7 @@ email=object.email;</camunda:script>
           <dc:Bounds x="939" y="712" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_1xilvf7_di" bpmnElement="Activity_0t3l45g">
+      <bpmndi:BPMNShape id="Activity_1xilvf7_di" bpmnElement="t_addOrderToDB">
         <dc:Bounds x="1140" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataOutputAssociation_0qh8oke_di" bpmnElement="DataOutputAssociation_0qh8oke">
@@ -673,7 +685,14 @@ email=object.email;</camunda:script>
           <dc:Bounds x="879" y="336" width="82" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_0wi087l_di" bpmnElement="Activity_072z7jg">
+      <bpmndi:BPMNShape id="Activity_0wi087l_di" bpmnElement="t_reserveStock">
+        <dc:Bounds x="1460" y="690" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_11t1h8q_di" bpmnElement="Flow_11t1h8q">
+        <di:waypoint x="1390" y="730" />
+        <di:waypoint x="1460" y="730" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0n3zwrx_di" bpmnElement="Activity_14cnmx7">
         <dc:Bounds x="1290" y="690" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
