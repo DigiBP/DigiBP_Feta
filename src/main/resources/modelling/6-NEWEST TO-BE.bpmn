@@ -321,7 +321,7 @@ OrderStatus=object.OrderStatus;</camunda:script>
             </camunda:inputParameter>
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
-    "orderId":orderId
+    "orderId":"660"
 });</camunda:script>
             </camunda:inputParameter>
             <camunda:outputParameter name="SandwichQuantity">
