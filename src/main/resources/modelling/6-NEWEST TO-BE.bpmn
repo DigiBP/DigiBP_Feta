@@ -52,7 +52,7 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1v3najy" sourceRef="Activity_0ew9ynt" targetRef="Gateway_1jescqe" />
     <bpmn:sequenceFlow id="Flow_18ef1gf" sourceRef="Gateway_1jescqe" targetRef="Activity_0cprer8">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${deliveryRequired == "TRUE"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${deliveryRequired == "Yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_052m8qy" name="Yes" sourceRef="Gateway_0sxrj9f" targetRef="t_addOrderToDB">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valid == "TRUE"}</bpmn:conditionExpression>
@@ -60,7 +60,7 @@
     <bpmn:dataObjectReference id="Flow_16s64u8" name="Google Sheet IncomingOrder" dataObjectRef="Flow_0yxzjf1" />
     <bpmn:dataObject id="Flow_0yxzjf1" />
     <bpmn:sequenceFlow id="Flow_0fkg53z" sourceRef="Gateway_1jescqe" targetRef="Gateway_1ygs5wf">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${deliveryRequired == "FALSE"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${deliveryRequired == "No"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0iqd01m" sourceRef="Activity_02qtoww" targetRef="Event_1j669dj" />
     <bpmn:sequenceFlow id="Flow_00lslar" sourceRef="Activity_18ct8kd" targetRef="Activity_1gwvtrw" />
