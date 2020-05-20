@@ -399,7 +399,7 @@ email=object.email;</camunda:script>
           <camunda:connector>
             <camunda:inputOutput>
               <camunda:inputParameter name="method">POST</camunda:inputParameter>
-              <camunda:inputParameter name="url">https://hook.integromat.com/4u9t39putyawgy1ghi4utxpgvtb8aywe</camunda:inputParameter>
+              <camunda:inputParameter name="url">https://hook.integromat.com/jameoa9e5i5f25clmqzeptu8b51ffw1y</camunda:inputParameter>
               <camunda:inputParameter name="payload">
                 <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
     "orderId":orderId_DB
@@ -810,7 +810,7 @@ for(i=0; i &lt; object.ingredients.length; i++){
         <di:waypoint x="1812" y="850" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_0lf9p9u_di" bpmnElement="t_reserveStock" isExpanded="false">
-        <dc:Bounds x="1360" y="690" width="100" height="80" />
+        <dc:Bounds x="1340" y="670" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1sq2y4w_di" bpmnElement="Flow_1sq2y4w">
         <di:waypoint x="1478" y="850" />
@@ -828,13 +828,15 @@ for(i=0; i &lt; object.ingredients.length; i++){
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1hj99v7_di" bpmnElement="Flow_1hj99v7">
         <di:waypoint x="1240" y="730" />
-        <di:waypoint x="1360" y="730" />
+        <di:waypoint x="1300" y="730" />
+        <di:waypoint x="1300" y="710" />
+        <di:waypoint x="1340" y="710" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0nybwio_di" bpmnElement="Flow_0nybwio">
-        <di:waypoint x="1460" y="730" />
-        <di:waypoint x="1485" y="730" />
-        <di:waypoint x="1485" y="920" />
-        <di:waypoint x="1510" y="920" />
+        <di:waypoint x="1390" y="670" />
+        <di:waypoint x="1390" y="650" />
+        <di:waypoint x="1530" y="650" />
+        <di:waypoint x="1530" y="880" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
