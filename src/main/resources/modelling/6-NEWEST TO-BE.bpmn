@@ -50,7 +50,6 @@
     <bpmn:sequenceFlow id="Flow_1jcmoxm" name="Resolved" sourceRef="Gateway_1oky0sb" targetRef="t_addOrderToDB">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${OrderStatus == "Resolved"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1rdi42o" sourceRef="Activity_0arydmw" targetRef="Activity_0ew9ynt" />
     <bpmn:sequenceFlow id="Flow_1v3najy" sourceRef="Activity_0ew9ynt" targetRef="Gateway_1jescqe" />
     <bpmn:sequenceFlow id="Flow_18ef1gf" sourceRef="Gateway_1jescqe" targetRef="Activity_0cprer8">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${deliveryRequired == "TRUE"}</bpmn:conditionExpression>
@@ -164,10 +163,10 @@
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_190g150</bpmn:incoming>
-      <bpmn:outgoing>Flow_1rdi42o</bpmn:outgoing>
+      <bpmn:outgoing>Flow_08n90yy</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:manualTask id="Activity_0ew9ynt" name="Prepare for Delivery / Pick-up">
-      <bpmn:incoming>Flow_1rdi42o</bpmn:incoming>
+      <bpmn:incoming>Flow_08n90yy</bpmn:incoming>
       <bpmn:outgoing>Flow_1v3najy</bpmn:outgoing>
     </bpmn:manualTask>
     <bpmn:exclusiveGateway id="Gateway_1jescqe" name="Pick-up or Delivery?">
@@ -468,6 +467,7 @@ for(i=0; i &lt; object.ingredients.length; i++){
       <bpmn:sequenceFlow id="Flow_1sq2y4w" sourceRef="Event_1ok6h6m" targetRef="Activity_0v2cyeo" />
       <bpmn:dataStoreReference id="Flow_0fsam95" name="Stock DB (Integromat Data Store)" />
     </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_08n90yy" sourceRef="Activity_0arydmw" targetRef="Activity_0ew9ynt" />
   </bpmn:process>
   <bpmn:process id="Process_0m0c358" isExecutable="false" />
   <bpmn:message id="Message_1yaw54s" name="m_chatbotCallback" />
@@ -523,11 +523,6 @@ for(i=0; i &lt; object.ingredients.length; i++){
           <dc:Bounds x="1411" y="486" width="79" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1rdi42o_di" bpmnElement="Flow_1rdi42o">
-        <di:waypoint x="1560" y="960" />
-        <di:waypoint x="1560" y="1153" />
-        <di:waypoint x="1710" y="1153" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Gateway_1jescqe_di" bpmnElement="Gateway_1jescqe" isMarkerVisible="true">
         <dc:Bounds x="1865" y="1128" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -810,6 +805,12 @@ for(i=0; i &lt; object.ingredients.length; i++){
         <di:waypoint x="1510" y="650" />
         <di:waypoint x="1560" y="650" />
         <di:waypoint x="1560" y="880" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08n90yy_di" bpmnElement="Flow_08n90yy">
+        <di:waypoint x="1610" y="920" />
+        <di:waypoint x="1660" y="920" />
+        <di:waypoint x="1660" y="1153" />
+        <di:waypoint x="1710" y="1153" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
