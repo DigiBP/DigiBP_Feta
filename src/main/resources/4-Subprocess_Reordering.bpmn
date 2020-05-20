@@ -14,20 +14,20 @@
     <bpmn:businessRuleTask id="Activity_14mubgg" name="Determine if reorder necessary" camunda:resultVariable="reorderingResult" camunda:decisionRef="Decision_ReorderStock" camunda:mapDecisionResult="singleResult">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="SaltQuantity">
-            <camunda:script scriptFormat="JavaScript">Number(SaltQuantity)</camunda:script>
+          <camunda:inputParameter name="saltQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(saltQuantity)</camunda:script>
           </camunda:inputParameter>
-          <camunda:inputParameter name="ButterQuantity">
-            <camunda:script scriptFormat="JavaScript">Number(ButterQuantity)</camunda:script>
+          <camunda:inputParameter name="butterQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(butterQuantity)</camunda:script>
           </camunda:inputParameter>
-          <camunda:inputParameter name="HamQuantity">
-            <camunda:script scriptFormat="JavaScript">Number(HamQuantity)</camunda:script>
+          <camunda:inputParameter name="hamQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(hamQuantity)</camunda:script>
           </camunda:inputParameter>
-          <camunda:inputParameter name="SugarQuantity">
-            <camunda:script scriptFormat="JavaScript">Number(SugarQuantity)</camunda:script>
+          <camunda:inputParameter name="sugarQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(sugarQuantity)</camunda:script>
           </camunda:inputParameter>
-          <camunda:inputParameter name="FlowerQuantity">
-            <camunda:script scriptFormat="JavaScript">Number(FlowerQuantity)</camunda:script>
+          <camunda:inputParameter name="flowerQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(flowerQuantity)</camunda:script>
           </camunda:inputParameter>
           <camunda:outputParameter name="reorderRequired">${reorderingResult.reorderRequired}</camunda:outputParameter>
           <camunda:outputParameter name="reorderHam">${reorderingResult.reorderHam}</camunda:outputParameter>
@@ -45,7 +45,7 @@
       <bpmn:outgoing>Flow_1l7noc7</bpmn:outgoing>
       <bpmn:outgoing>Flow_1n8v8ak</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_0vzwzs6" name="Reorder Missing Ingredients and Confirm upon receival">
+    <bpmn:userTask id="Activity_0vzwzs6" name="Reorder Missing Ingredients and Confirm upon receival" camunda:assignee="shopassistant">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="reorderHam" label="Reorder Ham? (10kg)" type="string" />
@@ -64,39 +64,39 @@
           <camunda:inputOutput>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/4u9t39putyawgy1ghi4utxpgvtb8aywe</camunda:inputParameter>
-            <camunda:outputParameter name="HamQuantity">
+            <camunda:outputParameter name="hamQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 for (i=0; i &lt; object.stocklevels.length; i++){
 if (object.stocklevels[i].ingredient.localeCompare("ham") == 0) {
-HamQuantity = object.stocklevels[i].stocklevel;
+hamQuantity = object.stocklevels[i].stocklevel;
 }}</camunda:script>
             </camunda:outputParameter>
-            <camunda:outputParameter name="ButterQuantity">
+            <camunda:outputParameter name="butterQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 for (i=0; i &lt; object.stocklevels.length; i++){
 if (object.stocklevels[i].ingredient.localeCompare("butter") == 0) {
-ButterQuantity = object.stocklevels[i].stocklevel;
+butterQuantity = object.stocklevels[i].stocklevel;
 }}</camunda:script>
             </camunda:outputParameter>
-            <camunda:outputParameter name="SaltQuantity">
+            <camunda:outputParameter name="saltQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 for (i=0; i &lt; object.stocklevels.length; i++){
 if (object.stocklevels[i].ingredient.localeCompare("salt") == 0) {
-SaltQuantity = object.stocklevels[i].stocklevel;
+saltQuantity = object.stocklevels[i].stocklevel;
 }}</camunda:script>
             </camunda:outputParameter>
-            <camunda:outputParameter name="SugarQuantity">
+            <camunda:outputParameter name="sugarQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 for (i=0; i &lt; object.stocklevels.length; i++){
 if (object.stocklevels[i].ingredient.localeCompare("sugar") == 0) {
-SugarQuantity = object.stocklevels[i].stocklevel;
+sugarQuantity = object.stocklevels[i].stocklevel;
 }}</camunda:script>
             </camunda:outputParameter>
-            <camunda:outputParameter name="FlowerQuantity">
+            <camunda:outputParameter name="flowerQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 for (i=0; i &lt; object.stocklevels.length; i++){
 if (object.stocklevels[i].ingredient.localeCompare("flower") == 0) {
-FlowerQuantity = object.stocklevels[i].stocklevel;
+flowerQuantity = object.stocklevels[i].stocklevel;
 }}</camunda:script>
             </camunda:outputParameter>
           </camunda:inputOutput>
