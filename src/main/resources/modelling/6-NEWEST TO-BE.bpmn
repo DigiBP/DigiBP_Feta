@@ -202,7 +202,8 @@
 });</camunda:script>
             </camunda:inputParameter>
             <camunda:outputParameter name="orderId_DB">
-              <camunda:script scriptFormat="JavaScript"></camunda:script>
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+name=object.orderId_DB;</camunda:script>
             </camunda:outputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
