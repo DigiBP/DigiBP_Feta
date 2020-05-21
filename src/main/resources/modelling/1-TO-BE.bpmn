@@ -20,11 +20,11 @@
         <bpmn:flowNodeRef>Activity_094f25q</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_1oky0sb</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>t_addOrderToDB</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>t_getOrderStatus</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1belsq5</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>t_getOrderDetailsSendConfirmation</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>t_reserveStock</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1s11869</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_getOrderStatus</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_02qv65s" name="Baker">
         <bpmn:flowNodeRef>t_bakePrepareOrder</bpmn:flowNodeRef>
@@ -186,35 +186,6 @@ name=object.orderId_DB;</camunda:script>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0qh8oke">
         <bpmn:targetRef>Flow_1lfke2x</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="t_getOrderStatus" name="Get Order Status">
-      <bpmn:extensionElements>
-        <camunda:connector>
-          <camunda:inputOutput>
-            <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
-
-    "OrderID":orderId
-   
-});</camunda:script>
-            </camunda:inputParameter>
-            <camunda:inputParameter name="headers">
-              <camunda:map>
-                <camunda:entry key="Content-Type">application/json</camunda:entry>
-              </camunda:map>
-            </camunda:inputParameter>
-            <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">https://hook.integromat.com/93mv3fwb8wslymids8ceenhskvczlo9u</camunda:inputParameter>
-            <camunda:outputParameter name="OrderStatus">
-              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-OrderStatus=object.OrderStatus;</camunda:script>
-            </camunda:outputParameter>
-          </camunda:inputOutput>
-          <camunda:connectorId>http-connector</camunda:connectorId>
-        </camunda:connector>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1etcymb</bpmn:incoming>
-      <bpmn:outgoing>Flow_0tctivd</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_1etcymb" sourceRef="Event_1belsq5" targetRef="t_getOrderStatus" />
     <bpmn:intermediateCatchEvent id="Event_1belsq5" name="Callback from Chatbot">
@@ -499,6 +470,10 @@ for(i=0; i &lt; object.ingredients.length; i++){
     <bpmn:dataStoreReference id="Flow_0pmkt3c" name="Stock Database (Integromat Data Store)" />
     <bpmn:dataObjectReference id="Flow_1mk1f9q" name="Ingredient List (Google Sheets)" dataObjectRef="Flow_0u22nc2" />
     <bpmn:dataObject id="Flow_0u22nc2" />
+    <bpmn:manualTask id="t_getOrderStatus" name="Get Order Status">
+      <bpmn:incoming>Flow_1etcymb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tctivd</bpmn:outgoing>
+    </bpmn:manualTask>
   </bpmn:process>
   <bpmn:process id="Process_0m0c358" isExecutable="false" />
   <bpmn:message id="Message_1yaw54s" name="m_chatbotCallback" />
@@ -747,9 +722,6 @@ for(i=0; i &lt; object.ingredients.length; i++){
       <bpmndi:BPMNShape id="Activity_09rtdeh_di" bpmnElement="Activity_094f25q">
         <dc:Bounds x="710" y="510" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1dczdu1_di" bpmnElement="t_getOrderStatus">
-        <dc:Bounds x="920" y="510" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_03hyvyg_di" bpmnElement="Flow_03hyvyg">
         <di:waypoint x="1115" y="550" />
         <di:waypoint x="1292" y="550" />
@@ -872,6 +844,9 @@ for(i=0; i &lt; object.ingredients.length; i++){
         <di:waypoint x="1360" y="575" />
         <di:waypoint x="1425" y="575" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_13ux9hj_di" bpmnElement="t_getOrderStatus">
+        <dc:Bounds x="920" y="510" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
