@@ -25,8 +25,13 @@
           <text></text>
         </inputExpression>
       </input>
-      <input id="InputClause_1s06vb1" label="FlowerQuantity" camunda:inputVariable="FlowerQuantity">
+      <input id="InputClause_1s06vb1" label="FlourQuantity" camunda:inputVariable="FlourQuantity">
         <inputExpression id="LiteralExpression_09zfzie" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0li85gu">
+        <inputExpression id="LiteralExpression_1btmt1e" typeRef="string">
           <text></text>
         </inputExpression>
       </input>
@@ -35,7 +40,7 @@
       <output id="OutputClause_08ambf3" label="ReorderButter" name="reorderButter" typeRef="boolean" />
       <output id="OutputClause_0ydv9cv" label="ReorderSalt" name="reorderSalt" typeRef="boolean" />
       <output id="OutputClause_097htns" label="ReorderSugar" name="reorderSugar" typeRef="boolean" />
-      <output id="OutputClause_06beq4t" label="ReorderFlower" name="reorderFlower" typeRef="boolean" />
+      <output id="OutputClause_06beq4t" label="ReorderFlour" name="reorderFlour" typeRef="boolean" />
       <rule id="DecisionRule_0rlkbdz">
         <description>5</description>
         <inputEntry id="UnaryTests_196qy16">
@@ -52,6 +57,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_05rx2pf">
           <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ndr2e1">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1gq2e2a">
           <text>"TRUE"</text>
@@ -89,6 +97,9 @@
         <inputEntry id="UnaryTests_1oknfp9">
           <text>&gt;= 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1pu4fa9">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1tx1fri">
           <text>"TRUE"</text>
         </outputEntry>
@@ -124,6 +135,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_1m15s3s">
           <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rgseji">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1kkv46a">
           <text>"TRUE"</text>
@@ -161,6 +175,9 @@
         <inputEntry id="UnaryTests_1227b29">
           <text>&lt; 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0c73kdx">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0tt479p">
           <text>"TRUE"</text>
         </outputEntry>
@@ -197,6 +214,9 @@
         <inputEntry id="UnaryTests_16z451u">
           <text>&lt; 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1q7pp5x">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_10e1fyx">
           <text>"TRUE"</text>
         </outputEntry>
@@ -231,6 +251,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0ds0kit">
           <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lv5gkv">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1176lp1">
           <text>"TRUE"</text>
@@ -268,6 +291,9 @@
         <inputEntry id="UnaryTests_0akjhaw">
           <text>&gt;= 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_18gpiie">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0msvy47">
           <text>"TRUE"</text>
         </outputEntry>
@@ -302,6 +328,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_12560yv">
           <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pcryjt">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0nljc6z">
           <text>"TRUE"</text>
@@ -338,6 +367,9 @@
         <inputEntry id="UnaryTests_0m7odjx">
           <text>&lt; 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0ehpz7f">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_07221ou">
           <text>"TRUE"</text>
         </outputEntry>
@@ -372,6 +404,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_00p4ckz">
           <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bf89k2">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_05hm10v">
           <text>"TRUE"</text>
@@ -408,6 +443,9 @@
         <inputEntry id="UnaryTests_1myti8j">
           <text>&gt;= 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0auajfe">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0jx56ua">
           <text>"TRUE"</text>
         </outputEntry>
@@ -442,6 +480,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0ajl3s4">
           <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1d3rbgw">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1dfn0xv">
           <text>"TRUE"</text>
@@ -478,6 +519,9 @@
         <inputEntry id="UnaryTests_1fb0gky">
           <text>&lt; 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0j1wgwb">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_19odr9b">
           <text>"TRUE"</text>
         </outputEntry>
@@ -512,6 +556,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_1mpsawy">
           <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jprf0l">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_17n3h9f">
           <text>"TRUE"</text>
@@ -548,6 +595,9 @@
         <inputEntry id="UnaryTests_0ocvbtj">
           <text>&gt;= 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1fzzaht">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0romlfi">
           <text>"TRUE"</text>
         </outputEntry>
@@ -582,6 +632,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0jbgdsc">
           <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gh8wpc">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1sq4eql">
           <text>"TRUE"</text>
@@ -619,6 +672,9 @@
         <inputEntry id="UnaryTests_0o2ho54">
           <text>&gt;= 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0wsahn3">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_07ot3ij">
           <text>"TRUE"</text>
         </outputEntry>
@@ -653,6 +709,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0qwjh1f">
           <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jjqhws">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1jx7q3c">
           <text>"TRUE"</text>
@@ -689,6 +748,9 @@
         <inputEntry id="UnaryTests_0usbywd">
           <text>&gt;= 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0gjstpx">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1wej7vj">
           <text>"TRUE"</text>
         </outputEntry>
@@ -723,6 +785,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_1n0n1op">
           <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zgs2lo">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_18qcxgq">
           <text>"TRUE"</text>
@@ -759,6 +824,9 @@
         <inputEntry id="UnaryTests_13fwdtx">
           <text>&lt; 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1d8z87v">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0bokom4">
           <text>"TRUE"</text>
         </outputEntry>
@@ -793,6 +861,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_10m4640">
           <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mffrdb">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_19rh4rl">
           <text>"TRUE"</text>
@@ -829,6 +900,9 @@
         <inputEntry id="UnaryTests_016wjni">
           <text>&gt;= 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0k30ptb">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0a234oa">
           <text>"TRUE"</text>
         </outputEntry>
@@ -863,6 +937,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_06mq93b">
           <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gvo6wp">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_13r58a2">
           <text>"TRUE"</text>
@@ -899,6 +976,9 @@
         <inputEntry id="UnaryTests_0sbtiia">
           <text>&gt;= 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0kyww57">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0an92g7">
           <text>"TRUE"</text>
         </outputEntry>
@@ -933,6 +1013,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0icvnme">
           <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03cxbmr">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0u1rh75">
           <text>"TRUE"</text>
@@ -970,6 +1053,9 @@
         <inputEntry id="UnaryTests_1yorl18">
           <text>&gt;= 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1xjxo5a">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0to4eg9">
           <text>"TRUE"</text>
         </outputEntry>
@@ -1004,6 +1090,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_15u5tnt">
           <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13s54ul">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_05b7tj9">
           <text>"TRUE"</text>
@@ -1040,6 +1129,9 @@
         <inputEntry id="UnaryTests_01gmatp">
           <text>&gt;= 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0azzudo">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_08j1i4r">
           <text>"TRUE"</text>
         </outputEntry>
@@ -1074,6 +1166,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_05eriu8">
           <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cfckem">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0dsstzv">
           <text>"TRUE"</text>
@@ -1110,6 +1205,9 @@
         <inputEntry id="UnaryTests_1s2jqjy">
           <text>&lt; 10000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_14lwgd2">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0kf508y">
           <text>"TRUE"</text>
         </outputEntry>
@@ -1145,6 +1243,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_1vippte">
           <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zjftaj">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0d4pmzy">
           <text>"FALSE"</text>

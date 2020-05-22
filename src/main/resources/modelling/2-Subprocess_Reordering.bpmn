@@ -26,15 +26,15 @@
           <camunda:inputParameter name="sugarQuantity">
             <camunda:script scriptFormat="JavaScript">Number(sugarQuantity)</camunda:script>
           </camunda:inputParameter>
-          <camunda:inputParameter name="flowerQuantity">
-            <camunda:script scriptFormat="JavaScript">Number(flowerQuantity)</camunda:script>
+          <camunda:inputParameter name="flourQuantity">
+            <camunda:script scriptFormat="JavaScript">Number(flourQuantity)</camunda:script>
           </camunda:inputParameter>
           <camunda:outputParameter name="reorderRequired">${reorderingResult.reorderRequired}</camunda:outputParameter>
           <camunda:outputParameter name="reorderHam">${reorderingResult.reorderHam}</camunda:outputParameter>
           <camunda:outputParameter name="reorderButter">${reorderingResult.reorderButter}</camunda:outputParameter>
           <camunda:outputParameter name="reorderSalt">${reorderingResult.reorderSalt}</camunda:outputParameter>
           <camunda:outputParameter name="reorderSugar">${reorderingResult.reorderSugar}</camunda:outputParameter>
-          <camunda:outputParameter name="reorderFlower">${reorderingResult.reorderFlower}</camunda:outputParameter>
+          <camunda:outputParameter name="reorderFlour">${reorderingResult.reorderFlour}</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_18tn0j7</bpmn:incoming>
@@ -82,8 +82,8 @@ sugarQuantity = object.stocklevels[i].stocklevel;
             <camunda:outputParameter name="flowerQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 for (i=0; i &lt; object.stocklevels.length; i++){
-if (object.stocklevels[i].ingredient.localeCompare("flower") == 0) {
-flowerQuantity = object.stocklevels[i].stocklevel;
+if (object.stocklevels[i].ingredient.localeCompare("flour") == 0) {
+flourQuantity = object.stocklevels[i].stocklevel;
 }}</camunda:script>
             </camunda:outputParameter>
           </camunda:inputOutput>
@@ -125,7 +125,7 @@ flowerQuantity = object.stocklevels[i].stocklevel;
     "reorderButter":reorderButter,
     "reorderSalt":reorderSalt,
     "reorderSugar":reorderSugar,
-    "reorderFlower":reorderFlower
+    "reorderFlour":reorderFlour
 });</camunda:script>
             </camunda:inputParameter>
             <camunda:inputParameter name="headers">
@@ -150,7 +150,7 @@ flowerQuantity = object.stocklevels[i].stocklevel;
           <camunda:formField id="reorderButter" label="Reorder Butter? (30kg)" type="string" />
           <camunda:formField id="reorderSalt" label="Reorder Salt? (20kg)" type="string" />
           <camunda:formField id="reorderSugar" label="Reorder Sugar? (22kg)" type="string" />
-          <camunda:formField id="reorderFlower" label="Reorder Flower? (30kg)" type="string" />
+          <camunda:formField id="reorderFlour" label="Reorder Flour? (30kg)" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1l7noc7</bpmn:incoming>
