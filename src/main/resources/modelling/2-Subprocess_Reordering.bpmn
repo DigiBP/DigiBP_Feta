@@ -79,7 +79,7 @@ if (object.stocklevels[i].ingredient.localeCompare("sugar") == 0) {
 sugarQuantity = object.stocklevels[i].stocklevel;
 }}</camunda:script>
             </camunda:outputParameter>
-            <camunda:outputParameter name="flowerQuantity">
+            <camunda:outputParameter name="flourQuantity">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 for (i=0; i &lt; object.stocklevels.length; i++){
 if (object.stocklevels[i].ingredient.localeCompare("flour") == 0) {
