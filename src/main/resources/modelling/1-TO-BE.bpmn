@@ -98,7 +98,7 @@
       <bpmn:outgoing>Flow_052m8qy</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_1u9nq4t" sourceRef="t_addOrderIssueList" targetRef="Activity_094f25q" />
-    <bpmn:serviceTask id="t_addOrderIssueList" name="Add Order to Issue List">
+    <bpmn:serviceTask id="t_addOrderIssueList" name="Add Order to Issue List and Notify Customer">
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
