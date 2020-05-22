@@ -107,12 +107,6 @@ flourQuantity = object.stocklevels[i].stocklevel;
     <bpmn:sequenceFlow id="Flow_0dru3y4" sourceRef="t_updateStockLevels" targetRef="Event_0wq2il9" />
     <bpmn:dataStoreReference id="Flow_0z2x073" name="Stock Database (Integromat Data Store)" />
     <bpmn:sequenceFlow id="SequenceFlow_18tn0j7" sourceRef="t_getCurrentStockLevels" targetRef="t_determineReorder" />
-    <bpmn:startEvent id="se_EveryThursday" name="Every Thursday at 23:00 (night Job)">
-      <bpmn:outgoing>Flow_1tkuudh</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_0nt250q">
-        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">2020-05-25T12:13:14Z</bpmn:timeDate>
-      </bpmn:timerEventDefinition>
-    </bpmn:startEvent>
     <bpmn:serviceTask id="t_updateStockLevels" name="Update Stock levels">
       <bpmn:extensionElements>
         <camunda:connector>
@@ -156,6 +150,9 @@ flourQuantity = object.stocklevels[i].stocklevel;
       <bpmn:incoming>Flow_1l7noc7</bpmn:incoming>
       <bpmn:outgoing>Flow_1k98ukf</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:startEvent id="se_EveryThursday" name="Every Thursday at 23:00 (night Job)" camunda:initiator="demo">
+      <bpmn:outgoing>Flow_1tkuudh</bpmn:outgoing>
+    </bpmn:startEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0mwbv6h">
@@ -231,7 +228,7 @@ flourQuantity = object.stocklevels[i].stocklevel;
         <di:waypoint x="450" y="290" />
         <di:waypoint x="506" y="290" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_1janqja_di" bpmnElement="se_EveryThursday">
+      <bpmndi:BPMNShape id="Event_0odbdy8_di" bpmnElement="se_EveryThursday">
         <dc:Bounds x="248" y="272" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="221" y="315" width="90" height="27" />
