@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0w70rau" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
   <bpmn:collaboration id="Collaboration_0mwbv6h">
-    <bpmn:participant id="Participant_0wkqmmm" name="Reordering" processRef="subprocess_reordering" />
+    <bpmn:participant id="Participant_0wkqmmm" name="Reordering" processRef="p_reordering" />
   </bpmn:collaboration>
-  <bpmn:process id="subprocess_reordering" isExecutable="true">
+  <bpmn:process id="p_reordering" isExecutable="true">
     <bpmn:laneSet id="LaneSet_08hjfms">
       <bpmn:lane id="Lane_0gkj9bn" name="Workflow Engine">
         <bpmn:flowNodeRef>Event_0wq2il9</bpmn:flowNodeRef>
