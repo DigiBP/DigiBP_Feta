@@ -109,3 +109,4 @@
 ## User
 - [Timothy Applewhite](https://github.com/timothyapplewhite)
 - Lukas Reimann
+- Maria Waldmeier
